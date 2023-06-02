@@ -7,6 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/GlobalStyles.xaml" />
+                <ResourceDictionary Source="Styles/MenuButtonStyles.xaml" />
+                <ResourceDictionary Source="Styles/CloseButtonStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

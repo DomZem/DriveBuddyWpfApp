@@ -46,30 +46,30 @@ Bold" VerticalAlignment="Center" />
 
                 <DockPanel Grid.Row="1" Background="#1F2937">
                     <StackPanel Margin="10">
-                        <RadioButton Margin="0" IsChecked="True">
+                        <RadioButton Margin="0" IsChecked="True" Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
-                                <Icon:PackIconMaterial Kind="Note" />
+                                <Icon:PackIconMaterial Kind="Note" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Lessons"/>
                             </StackPanel>
                         </RadioButton>
 
-                        <RadioButton IsChecked="True">
+                        <RadioButton IsChecked="True" Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
-                                <Icon:PackIconMaterial Kind="NaturePeople" />
+                                <Icon:PackIconMaterial Kind="NaturePeople" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Instructors"/>
                             </StackPanel>
                         </RadioButton>
 
-                        <RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
-                                <Icon:PackIconMaterial Kind="School" />
+                                <Icon:PackIconMaterial Kind="School" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Students"/>
                             </StackPanel>
                         </RadioButton>
 
-                        <RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
-                                <Icon:PackIconMaterial Kind="Car"/>
+                                <Icon:PackIconMaterial Kind="Car" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Cars"/>
                             </StackPanel>
                         </RadioButton>
@@ -85,8 +85,8 @@ Bold" VerticalAlignment="Center" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Button>
-                        <Icon:PackIconMaterial Kind="Close"/>
+                    <Button Style="{StaticResource CloseButtonStyle}">
+                        <Icon:PackIconMaterial Kind="Close" Style="{StaticResource CloseButtonIconStyle}"/>
                     </Button>
                 </Grid>
             </StackPanel>
