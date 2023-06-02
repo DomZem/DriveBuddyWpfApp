@@ -5,8 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DriveBuddyWpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Height="720" 
+        Width="1080"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Style="{StaticResource WinAll}">
+    <Border Background="#F3F4F6">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Background="#111827" Orientation="Horizontal">
+                    <Border 
+                        Width="40" 
+                        Height="40"
+                        CornerRadius="8"
+                        Background="#2563EB"
+                        HorizontalAlignment="Left"
+                        Margin="10">
+                        <Image Source="Images/Logo.png" 
+                               Width="20"
+                               Height="20"/>
+                    </Border>
+                    <TextBlock Text="DriveBuddy" Foreground="#FFFFFF" FontSize="20" FontFamily="Fonts/#Poppins
+Bold" VerticalAlignment="Center" />
+                </StackPanel>
+
+
+                <DockPanel Grid.Row="1" Background="#1F2937">
+                    <StackPanel Margin="10">
+                        <RadioButton Margin="0" IsChecked="True">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Note" />
+                                <TextBlock Text="Lessons"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton IsChecked="True">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="NaturePeople" />
+                                <TextBlock Text="Instructors"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton>
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="School" />
+                                <TextBlock Text="Students"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton>
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Car"/>
+                                <TextBlock Text="Cars"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <Grid Height="64" Background="#111827">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button>
+                        <Icon:PackIconMaterial Kind="Close"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
