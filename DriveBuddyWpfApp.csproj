@@ -90,6 +90,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\Views\CreateLessonModalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\Views\CreateStudentModalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\DataGridStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DatePickerStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,6 +169,9 @@
     </Compile>
     <Compile Include="MVVM\Views\CreateInstructorModalView.xaml.cs">
       <DependentUpon>CreateInstructorModalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\CreateLessonModalView.xaml.cs">
+      <DependentUpon>CreateLessonModalView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\CreateStudentModalView.xaml.cs">
       <DependentUpon>CreateStudentModalView.xaml</DependentUpon>

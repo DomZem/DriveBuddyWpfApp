@@ -50,14 +50,14 @@ Bold" VerticalAlignment="Center" />
 
                 <DockPanel Grid.Row="1" Background="#1F2937">
                     <StackPanel Margin="10">
-                        <RadioButton Margin="0" IsChecked="True" Command="{Binding LessonsViewCommand}" Style="{StaticResource menuButton}">
+                        <RadioButton Margin="0" Command="{Binding LessonsViewCommand}" Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Note" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Lessons"/>
                             </StackPanel>
                         </RadioButton>
 
-                        <RadioButton Command="{Binding InstructorsViewCommand}" Style="{StaticResource menuButton}">
+                        <RadioButton IsChecked="True" Command="{Binding InstructorsViewCommand}" Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="NaturePeople" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Instructors"/>

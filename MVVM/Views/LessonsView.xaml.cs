@@ -8,5 +8,11 @@ namespace DriveBuddyWpfApp.MVVM.Views
         {
             InitializeComponent();
         }
+
+        private void OpenCreateLessonModal_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var createLessonModal = new CreateLessonModalView();
+            createLessonModal.ShowDialog();
+        }
     }
 }
