@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Styles/CloseButtonStyles.xaml" />
                 <ResourceDictionary Source="Styles/AddButtonStyles.xaml" />
                 <ResourceDictionary Source="Styles/TitleStyles.xaml" />
+                <ResourceDictionary Source="Styles/DataGridStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:LessonsViewModel}">

@@ -30,7 +30,11 @@
         <!--#endregion-->
 
         <!--#region ===== DataGrid ===== -->
-        <DataGrid Grid.Row="1" Margin="10">
+        <DataGrid Grid.Row="1" Margin="10"
+                  RowStyle="{DynamicResource DataGridRowStyle}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
+                  CellStyle="{DynamicResource DataGridCellStyle}"  
+                  Style="{DynamicResource DataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" IsReadOnly="True" CanUserResize="False" Width="auto" />
 
@@ -57,11 +61,11 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button>
-                                    <Icon:PackIconMaterial Kind="PencilOutline" />
+                                <Button Style="{StaticResource GridEditButtonStyle}">
+                                    <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIconStyle}" />
                                 </Button>
-                                <Button Margin="5 0 0 0">
-                                    <Icon:PackIconMaterial Kind="DeleteOutline" />
+                                <Button Margin="5 0 0 0" Style="{StaticResource GridRemoveButtonStyle}">
+                                    <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource GridButtonIconStyle}" />
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
