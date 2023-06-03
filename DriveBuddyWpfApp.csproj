@@ -90,6 +90,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\Views\CreateStudentModalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\Views\InstructorsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +161,9 @@
     </Compile>
     <Compile Include="MVVM\Views\CreateInstructorModalView.xaml.cs">
       <DependentUpon>CreateInstructorModalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\CreateStudentModalView.xaml.cs">
+      <DependentUpon>CreateStudentModalView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\InstructorsView.xaml.cs">
       <DependentUpon>InstructorsView.xaml</DependentUpon>
