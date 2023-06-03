@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="Styles/GlobalStyles.xaml" />
                 <ResourceDictionary Source="Styles/MenuButtonStyles.xaml" />
                 <ResourceDictionary Source="Styles/CloseButtonStyles.xaml" />
+                <ResourceDictionary Source="Styles/AddButtonStyles.xaml" />
+                <ResourceDictionary Source="Styles/TitleStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:LessonsViewModel}">
