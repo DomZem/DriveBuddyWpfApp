@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Styles/LabelStyles.xaml" />
                 <ResourceDictionary Source="Styles/TextBoxStyles.xaml" />
                 <ResourceDictionary Source="Styles/ModalTitleStyles.xaml" />
+                <ResourceDictionary Source="Styles/ComboBoxStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:LessonsViewModel}">
