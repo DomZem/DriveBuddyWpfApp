@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="White" BorderBrush="#E3E9EF" BorderThickness="1" CornerRadius="7">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    
+</ResourceDictionary>

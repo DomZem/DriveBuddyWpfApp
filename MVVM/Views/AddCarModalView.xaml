@@ -22,31 +22,27 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Background="#111827">
-                <TextBlock Text="Create new Car"
-                           Margin="10"
-                           Foreground="#FFFFFF"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center" />
+                <TextBlock Text="Create new Car" Style="{StaticResource ModalTitleStyle}" />
             </StackPanel>
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1" Margin="10">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Mark" FontSize="13" />
-                        <TextBox />
+                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
+                        <TextBlock Text="Mark" Style="{StaticResource LabelStyle}" />
+                        <TextBox Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Registration number" FontSize="13" />
-                        <TextBox />
+                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
+                        <TextBlock Text="Registration number" Style="{StaticResource LabelStyle}" />
+                        <TextBox Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Course category" FontSize="13" />
+                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
+                        <TextBlock Text="Course category" Style="{StaticResource LabelStyle}" />
                         <ComboBox>
                             <ComboBoxItem>AM</ComboBoxItem>
                             <ComboBoxItem>A</ComboBoxItem>
@@ -68,22 +64,26 @@
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Margin="10">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Model" FontSize="13" />
-                        <TextBox />
+                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
+                        <TextBlock Text="Model" Style="{StaticResource LabelStyle}" />
+                        <TextBox Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Review date" FontSize="13" />
-                        <TextBox />
+                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
+                        <TextBlock Text="Review date" Style="{StaticResource LabelStyle}" />
+                        <TextBox Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>
 
             <StackPanel Grid.Row="2" Background="#111827">
                 <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="cancel" />
+                    <Button Margin="0" Style="{StaticResource CloseButtonStyle}">
+                        <TextBlock Text="cancel" Margin="8 6 8 6"/>
+                    </Button>
 
-                    <Button Margin="10 0 0 0" Content="insert" />
+                    <Button Margin="10 0 0 0" Style="{StaticResource AddButtonStyle}">
+                        <TextBlock Text="insert" Margin="8 6 8 6" />
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </Grid>
