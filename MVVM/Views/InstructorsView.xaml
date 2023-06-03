@@ -23,7 +23,7 @@
 
             <TextBlock Text="Instructors" Style="{StaticResource TitleStyle}" />
 
-            <Button Style="{StaticResource AddButtonStyle}">
+            <Button Style="{StaticResource AddButtonStyle}" Click="OpenCreateInstructorModal_Click">
                 <TextBlock Text="create new instructor" Margin="8 6 8 6"/>
             </Button>
         </Grid>

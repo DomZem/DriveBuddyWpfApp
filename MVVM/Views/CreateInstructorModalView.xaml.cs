@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace DriveBuddyWpfApp.MVVM.Views
 {
     /// <summary>
-    /// Interaction logic for AddCarModalView.xaml
+    /// Interaction logic for CreateInstructorModalView.xaml
     /// </summary>
-    public partial class AddCarModalView : Window
+    public partial class CreateInstructorModalView : Window
     {
-        public AddCarModalView()
+        public CreateInstructorModalView()
         {
             InitializeComponent();
         }

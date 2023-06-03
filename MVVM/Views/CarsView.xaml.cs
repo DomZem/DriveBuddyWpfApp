@@ -10,10 +10,10 @@ namespace DriveBuddyWpfApp.MVVM.Views
             InitializeComponent();
         }
 
-        private void OpenAddCarModal_Click(object sender, RoutedEventArgs e)
+        private void OpenCreateCarModal_Click(object sender, RoutedEventArgs e)
         {
-            var addCarModal = new AddCarModalView();
-            addCarModal.ShowDialog();
+            var createCarModal = new CreateCarModalView();
+            createCarModal.ShowDialog();    
         }
     }
 }
