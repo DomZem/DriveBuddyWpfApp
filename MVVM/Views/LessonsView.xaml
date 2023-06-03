@@ -4,9 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DriveBuddyWpfApp.MVVM.Views"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Lessons" />
+
+            <Button>
+                <StackPanel Orientation="Horizontal" Margin="8">
+                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Margin="0 0 5 0" Width="11" Height="11" />
+                    <TextBlock Text="Create new lesson" />
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <DataGrid Grid.Row="1" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" IsReadOnly="True" CanUserResize="False" Width="auto"/>
+
+                <DataGridTemplateColumn Header="Title" IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="#2563EB">
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                </Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Instructor" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Students" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Course category" IsReadOnly="True" Width="*" />
+                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button>
+                                    <Icon:PackIconMaterial Kind="PencilOutline" />
+                                </Button>
+                                <Button Margin="5 0 0 0">
+                                    <Icon:PackIconMaterial Kind="DeleteOutline" />
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
