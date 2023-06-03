@@ -4,16 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DriveBuddyWpfApp"
+        xmlns:viewModel="clr-namespace:DriveBuddyWpfApp.MVVM.ViewModels"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Height="720" 
         Width="1080"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         Style="{StaticResource WinAll}">
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
     <Border Background="#F3F4F6">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -46,28 +50,28 @@ Bold" VerticalAlignment="Center" />
 
                 <DockPanel Grid.Row="1" Background="#1F2937">
                     <StackPanel Margin="10">
-                        <RadioButton Margin="0" IsChecked="True" Style="{StaticResource menuButton}">
+                        <RadioButton Margin="0" IsChecked="True" Command="{Binding LessonsViewCommand}" Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Note" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Lessons"/>
                             </StackPanel>
                         </RadioButton>
 
-                        <RadioButton IsChecked="True" Style="{StaticResource menuButton}">
+                        <RadioButton Command="{Binding InstructorsViewCommand}" Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="NaturePeople" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Instructors"/>
                             </StackPanel>
                         </RadioButton>
 
-                        <RadioButton Style="{StaticResource menuButton}">
+                        <RadioButton Command="{Binding StudentsViewCommand}" Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="School" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Students"/>
                             </StackPanel>
                         </RadioButton>
 
-                        <RadioButton Style="{StaticResource menuButton}">
+                        <RadioButton Command="{Binding CarsViewCommand}" Style="{StaticResource menuButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Car" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Cars"/>
@@ -89,6 +93,7 @@ Bold" VerticalAlignment="Center" />
                         <Icon:PackIconMaterial Kind="Close" Style="{StaticResource CloseButtonIconStyle}"/>
                     </Button>
                 </Grid>
+                <ContentControl Content="{Binding CurrentView}" />
             </StackPanel>
         </Grid>
     </Border>
