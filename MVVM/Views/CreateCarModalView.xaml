@@ -77,7 +77,8 @@
 
             <StackPanel Grid.Row="2" Background="#111827">
                 <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Margin="0" Style="{StaticResource CloseButtonStyle}">
+                    <Button Margin="0" Style="{StaticResource CloseButtonStyle}"
+                            Click="CloseModalBtn_Click">
                         <TextBlock Text="cancel" Margin="8 6 8 6"/>
                     </Button>
 
