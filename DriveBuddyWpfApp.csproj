@@ -250,7 +250,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DatabaseSQL\CreateDb.sql" />
-    <Content Include="DatabaseSQL\Triggers.sql" />
+    <Content Include="DatabaseSQL\InsertData.sql" />
+    <Content Include="DatabaseSQL\TriggerCheckLessonDetails.sql" />
+    <Content Include="DatabaseSQL\TriggerCheckStudentAge.sql" />
+    <Content Include="DatabaseSQL\TriggerDeleteLessonsOnInstructorLicenseChange.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

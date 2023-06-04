@@ -89,7 +89,7 @@ Bold" VerticalAlignment="Center" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Style="{StaticResource CloseButtonStyle}">
+                    <Button Style="{StaticResource CloseButtonStyle}" Click="CloseAppBtn_Click">
                         <Icon:PackIconMaterial Kind="Close" Style="{StaticResource CloseButtonIconStyle}"/>
                     </Button>
                 </Grid>
