@@ -110,6 +110,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\Views\UpdateCarModalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\UpdateInstructorModalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\UpdateLessonModalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\UpdateStudentModalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\AddButtonStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +201,18 @@
     <Compile Include="MVVM\Views\StudentsView.xaml.cs">
       <DependentUpon>StudentsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Views\UpdateCarModalView.xaml.cs">
+      <DependentUpon>UpdateCarModalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\UpdateInstructorModalView.xaml.cs">
+      <DependentUpon>UpdateInstructorModalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\UpdateLessonModalView.xaml.cs">
+      <DependentUpon>UpdateLessonModalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\UpdateStudentModalView.xaml.cs">
+      <DependentUpon>UpdateStudentModalView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -219,6 +247,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MVVM\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DatabaseSQL\CreateDb.sql" />
+    <Content Include="DatabaseSQL\Triggers.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
