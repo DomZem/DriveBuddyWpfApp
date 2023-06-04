@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
     </Reference>
@@ -45,7 +51,10 @@
       <HintPath>packages\PresentationFramework.Aero2.1.0.1\lib\PresentationFramework.Aero2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -172,6 +181,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\Models\DriveBuddyModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DriveBuddyModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Models\DriveBuddyModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DriveBuddyModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\ViewModels\CarsViewModel.cs" />
     <Compile Include="MVVM\ViewModels\InstructorsViewModel.cs" />
     <Compile Include="MVVM\ViewModels\LessonsViewModel.cs" />
@@ -233,6 +252,13 @@
     <Resource Include="Fonts\PoppinsBold.ttf" />
     <Resource Include="Fonts\PoppinsMedium.ttf" />
     <Resource Include="Fonts\PoppinsRegular.ttf" />
+    <EntityDeploy Include="MVVM\Models\DriveBuddyModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DriveBuddyModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MVVM\Models\DriveBuddyModel.edmx.diagram">
+      <DependentUpon>DriveBuddyModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -245,15 +271,20 @@
   <ItemGroup>
     <Resource Include="Images\Logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MVVM\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="DatabaseSQL\CreateDb.sql" />
     <Content Include="DatabaseSQL\InsertData.sql" />
     <Content Include="DatabaseSQL\TriggerCheckLessonDetails.sql" />
     <Content Include="DatabaseSQL\TriggerCheckStudentAge.sql" />
     <Content Include="DatabaseSQL\TriggerDeleteLessonsOnInstructorLicenseChange.sql" />
+    <Content Include="MVVM\Models\DriveBuddyModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DriveBuddyModel.Context.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
