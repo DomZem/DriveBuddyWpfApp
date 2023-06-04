@@ -181,15 +181,38 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\Models\Car.cs">
+      <DependentUpon>DriveBuddyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Models\Category.cs">
+      <DependentUpon>DriveBuddyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Models\CourseDetail.cs">
+      <DependentUpon>DriveBuddyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Models\DriveBuddyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DriveBuddyModel.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Models\DriveBuddyModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DriveBuddyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Models\DriveBuddyModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DriveBuddyModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Models\Instructor.cs">
+      <DependentUpon>DriveBuddyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Models\Lesson.cs">
+      <DependentUpon>DriveBuddyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Models\Student.cs">
+      <DependentUpon>DriveBuddyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MVVM\ViewModels\CarsViewModel.cs" />
     <Compile Include="MVVM\ViewModels\InstructorsViewModel.cs" />
@@ -281,6 +304,12 @@
     <Content Include="MVVM\Models\DriveBuddyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DriveBuddyModel.Context.cs</LastGenOutput>
+      <DependentUpon>DriveBuddyModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="MVVM\Models\DriveBuddyModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DriveBuddyModel.edmx</DependentUpon>
+      <LastGenOutput>DriveBuddyModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

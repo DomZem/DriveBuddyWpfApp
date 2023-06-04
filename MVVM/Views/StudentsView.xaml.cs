@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using DriveBuddyWpfApp.MVVM.ViewModels;
+using System.Windows.Controls;
 
 namespace DriveBuddyWpfApp.MVVM.Views
 {
@@ -7,6 +8,7 @@ namespace DriveBuddyWpfApp.MVVM.Views
         public StudentsView()
         {
             InitializeComponent();
+            DataContext = new StudentsViewModel();
         }
 
         private void OpenCreateStudentModal_Click(object sender, System.Windows.RoutedEventArgs e)
