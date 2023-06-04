@@ -34,7 +34,7 @@ namespace DriveBuddyWpfApp.MVVM.Models
 
         public string Phone { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; } 
 
         public string BirthDateText => BirthDate.ToString("d");
 

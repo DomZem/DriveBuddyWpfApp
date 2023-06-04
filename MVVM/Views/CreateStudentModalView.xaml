@@ -35,29 +35,32 @@
                 <StackPanel Grid.Column="1" Margin="10">
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="First name" Style="{StaticResource LabelStyle}" />
-                        <TextBox Style="{StaticResource TextBoxStyle}" />
+                        <TextBox Text="{Binding NewStudent.FirstName}" Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Email" Style="{StaticResource LabelStyle}" />
-                        <TextBox Style="{StaticResource TextBoxStyle}" />
+                        <TextBox Text="{Binding NewStudent.Email}" Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Birth date" Style="{StaticResource LabelStyle}" />
-                        <TextBox Style="{StaticResource TextBoxStyle}" />
+                        <TextBox Text="{Binding NewStudent.BirthDate, StringFormat=dd.MM.yyyy}" 
+                                 Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Margin="10">
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Last name" Style="{StaticResource LabelStyle}" />
-                        <TextBox Style="{StaticResource TextBoxStyle}" />
+                        <TextBox Text="{Binding NewStudent.LastName}" Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Phone" Style="{StaticResource LabelStyle}" />
-                        <TextBox Style="{StaticResource TextBoxStyle}" />
+                        <TextBox Text="{Binding NewStudent.Phone}" Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Course category" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}">
+                        <ComboBox SelectedValue="{Binding NewStudentSelectedCourseCategory, Mode=TwoWay}" 
+                                  SelectedValuePath="Content" 
+                                  Style="{StaticResource ComboBoxStyle}">
                             <ComboBoxItem>AM</ComboBoxItem>
                             <ComboBoxItem>A1</ComboBoxItem>
                             <ComboBoxItem>A2</ComboBoxItem>
@@ -86,7 +89,8 @@
                         <TextBlock Text="cancel" Margin="8 6 8 6"/>
                     </Button>
 
-                    <Button Margin="10 0 0 0" Style="{StaticResource AddButtonStyle}">
+                    <Button Margin="10 0 0 0" Style="{StaticResource AddButtonStyle}"
+                            Command="{Binding AddStudentCommand}">
                         <TextBlock Text="create" Margin="8 6 8 6" />
                     </Button>
                 </StackPanel>
