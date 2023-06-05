@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DriveBuddyWpfApp.MVVM.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DriveBuddyWpfApp.MVVM.Views
@@ -8,6 +9,7 @@ namespace DriveBuddyWpfApp.MVVM.Views
         public CarsView()
         {
             InitializeComponent();
+            DataContext = new CarsViewModel();
         }
 
         private void OpenCreateCarModal_Click(object sender, RoutedEventArgs e)
