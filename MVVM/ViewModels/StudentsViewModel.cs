@@ -1,6 +1,8 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
+using System;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -63,29 +65,43 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         private void DeleteStudent(object obj)
         {
-            var student = obj as Student;
-            _db.Students.Remove(student);
-            _db.SaveChanges();
-            StudentsList.Remove(student);
-            MessageBox.Show("Student has been deleted", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            try
+            {
+                var student = obj as Student;
+                _db.Students.Remove(student);
+                _db.SaveChanges();
+                StudentsList.Remove(student);
+                MessageBox.Show("Student has been deleted", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            } 
+            catch
+            {
+                MessageBox.Show("Something went wrong. Student has not been deleted.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void AddStudent(object obj)
         {
-            CourseDetail courseDetail = _db.CourseDetails.FirstOrDefault(cd => cd.Category.CategoryName == NewStudentSelectedCourseCategory);
+            try
+            {
+                CourseDetail courseDetail = _db.CourseDetails.FirstOrDefault(cd => cd.Category.CategoryName == NewStudentSelectedCourseCategory);
 
-            if (courseDetail != null)
-            {
-                NewStudent.CourseDetails.Add(courseDetail);
-                _db.Students.Add(NewStudent);
-                _db.SaveChanges();
-                MessageBox.Show("Student has been added", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
-                StudentsList.Add(NewStudent);
-                NewStudent = new Student();
+                if (courseDetail != null)
+                {
+                    NewStudent.CourseDetails.Add(courseDetail);
+                    _db.Students.Add(NewStudent);
+                    _db.SaveChanges();
+                    MessageBox.Show("Student has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+                    StudentsList.Add(NewStudent);
+                    NewStudent = new Student();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid course category", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Invalid course category selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Something went wrong. Student has not been created. Check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
