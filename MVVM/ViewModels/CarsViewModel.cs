@@ -1,6 +1,7 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,9 +23,35 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        private string _newCarSelectedCourseCategory;
+
+        public string NewCarSelectedCourseCategory
+        {
+            get => _newCarSelectedCourseCategory;
+            set
+            {
+                _newCarSelectedCourseCategory = value;
+                OnPropertyChanged(nameof(NewCarSelectedCourseCategory));
+            }
+        }
+
+        private Car _newCar = new Car();
+
+        public Car NewCar
+        {
+            get => _newCar;
+            set
+            {
+                _newCar = value;
+                OnPropertyChanged(nameof(NewCar));
+            }
+        }
+
         #region ===== Commands =====
 
         public ICommand DeleteCarCommand { get; set; }
+
+        public ICommand AddCarCommand { get; set; }
 
         #endregion
 
@@ -34,6 +61,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             LoadCars();
 
             DeleteCarCommand = new RelayCommand(DeleteCar);
+            AddCarCommand = new RelayCommand(AddCar);
         }
 
         #region ===== Action Methods =====
@@ -51,6 +79,32 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             catch
             {
                 MessageBox.Show("Something went wrong. Car has not been deleted.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddCar(object obj)
+        {
+            try
+            {
+                Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == NewCarSelectedCourseCategory);
+
+                if (category != null)
+                {
+                    NewCar.CategoryID = category.CategoryID;
+                    _db.Cars.Add(NewCar);
+                    _db.SaveChanges();
+                    MessageBox.Show("Car has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CarsList.Add(NewCar);
+                    NewCar = new Car();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid course category", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong. Car has not been created. Check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
