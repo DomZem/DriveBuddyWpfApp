@@ -1,8 +1,7 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
-using System;
+using DriveBuddyWpfApp.MVVM.Views;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -25,7 +24,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
-        private Student _newStudent = new Student();
+        private Student _newStudent = new Student();        
 
         public Student NewStudent
         {
@@ -36,6 +35,8 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 OnPropertyChanged(nameof(NewStudent));
             }
         }
+
+        public static Student SelectedStudent { get; set; } = new Student();
 
         private string _newStudentSelectedCourseCategory;
 
@@ -49,19 +50,32 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        #region ===== Commands =====
+
         public ICommand DeleteStudentCommand { get; set; }  
 
         public ICommand AddStudentCommand { get; set; }
+
+        public ICommand SetSelectedStudentCommand { get; set; }
+
+        public ICommand UpdateStudentCommand { get; set; }
+
+        #endregion
 
         public StudentsViewModel()
         {
             _db = new DriveBuddyEntities();
             LoadStudents();
+
             DeleteStudentCommand = new RelayCommand(DeleteStudent); 
             AddStudentCommand = new RelayCommand(AddStudent);
+            SetSelectedStudentCommand = new RelayCommand(SetSelectedStudent);
+            UpdateStudentCommand = new RelayCommand(UpdateStudent);
         }
 
         private void LoadStudents() => StudentsList = new ObservableCollection<Student>(_db.Students);
+
+        #region ===== Action Methods =====
 
         private void DeleteStudent(object obj)
         {
@@ -104,5 +118,28 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 MessageBox.Show("Something went wrong. Student has not been created. Check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void SetSelectedStudent(object obj) 
+        {
+            var student = obj as Student;
+            SelectedStudent = student;
+            var updateStudentModalView = new UpdateStudentModalView();
+            updateStudentModalView.ShowDialog();  
+        }
+
+        private void UpdateStudent(object obj) 
+        {
+            try
+            {
+                _db.SaveChanges();
+                MessageBox.Show($"Student has been updated", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong. Student has not been updated.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
     }
 }
