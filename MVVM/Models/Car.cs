@@ -34,6 +34,12 @@ namespace DriveBuddyWpfApp.MVVM.Models
     
         public virtual Category Category { get; set; }
 
+        public string ReviewDateText => ReviewDate.ToString("d");
+
+        public string FullName => $"{Mark} {Model}";
+
+        public string CourseCategory => Category.CategoryName;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lesson> Lessons { get; set; }
     }
