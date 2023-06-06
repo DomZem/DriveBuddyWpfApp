@@ -58,7 +58,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource GridEditButtonStyle}">
+                                <Button Style="{StaticResource GridEditButtonStyle}"
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding DataContext.SetSelectedCarCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                     <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource GridButtonIconStyle}" />
                                 </Button>
                                 <Button Margin="5 0 0 0" Style="{StaticResource GridRemoveButtonStyle}"

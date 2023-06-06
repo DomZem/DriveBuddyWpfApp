@@ -1,5 +1,6 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
+using DriveBuddyWpfApp.MVVM.Views;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -47,11 +48,17 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        public static Car SelectedCar { get; set; } = new Car();
+
         #region ===== Commands =====
 
         public ICommand DeleteCarCommand { get; set; }
 
         public ICommand AddCarCommand { get; set; }
+
+        public ICommand SetSelectedCarCommand { get; set; }
+
+        public ICommand UpdateCarCommand { get; set; }
 
         #endregion
 
@@ -62,6 +69,8 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
             DeleteCarCommand = new RelayCommand(DeleteCar);
             AddCarCommand = new RelayCommand(AddCar);
+            SetSelectedCarCommand = new RelayCommand(SetSelectedCar);
+            UpdateCarCommand = new RelayCommand(UpdateCar);
         }
 
         #region ===== Action Methods =====
@@ -105,6 +114,27 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             catch
             {
                 MessageBox.Show("Something went wrong. Car has not been created. Check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SetSelectedCar(object obj)
+        {
+            var car = obj as Car;
+            SelectedCar = car;
+            var updateCarModalView = new UpdateCarModalView();
+            updateCarModalView.ShowDialog();
+        }
+
+        private void UpdateCar(object obj)
+        {
+            try
+            {
+                _db.SaveChanges();
+                MessageBox.Show($"Car has been updated", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong. Car has not been updated.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
