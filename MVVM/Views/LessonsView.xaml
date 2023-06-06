@@ -31,28 +31,29 @@
                   RowStyle="{DynamicResource DataGridRowStyle}" 
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
                   CellStyle="{DynamicResource DataGridCellStyle}" 
-                  Style="{DynamicResource DataGridStyle}">
+                  Style="{DynamicResource DataGridStyle}"
+                  ItemsSource="{Binding LessonsList}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" IsReadOnly="True" CanUserResize="False" Width="auto"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding LessonID}" IsReadOnly="True" CanUserResize="False" Width="auto"/>
 
                 <DataGridTemplateColumn Header="Title" IsReadOnly="True" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="#2563EB">
-                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                    <TextBlock Text="{Binding Instructor.FullName[0]}"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                 </Border>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Title}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="Instructor" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Students" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Course category" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="Instructor" Binding="{Binding Instructor.FullName}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Students" Binding="{Binding StudentsFullName}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Course category" Binding="{Binding Category.CategoryName}" IsReadOnly="True" Width="*" />
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
