@@ -9,9 +9,9 @@
 
 namespace DriveBuddyWpfApp.MVVM.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Instructor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,7 +30,11 @@ namespace DriveBuddyWpfApp.MVVM.Models
         public string Email { get; set; }
 
         public string Phone { get; set; }
-    
+
+        public string FullName => $"{FirstName} {LastName}";
+
+        public string Licenses => string.Join(", ", Categories.Select(c => c.CategoryName));
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lesson> Lessons { get; set; }
 
