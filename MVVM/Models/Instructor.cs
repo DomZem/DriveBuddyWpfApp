@@ -34,7 +34,7 @@ namespace DriveBuddyWpfApp.MVVM.Models
         public string FullName => $"{FirstName} {LastName}";
 
         public string Licenses => string.Join(", ", Categories.Select(c => c.CategoryName));
-
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lesson> Lessons { get; set; }
 

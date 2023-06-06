@@ -1,6 +1,8 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,9 +24,35 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        private Instructor _newInstructor = new Instructor();
+
+        public Instructor NewInstructor
+        {
+            get => _newInstructor;
+            set
+            {
+                _newInstructor = value;
+                OnPropertyChanged(nameof(NewInstructor));
+            }
+        }
+
+        private string _newInstructorLicenses = string.Empty;   
+
+        public string NewInstructorLicenses 
+        {
+            get => _newInstructorLicenses;
+            set
+            {
+                _newInstructorLicenses = value;
+                OnPropertyChanged(nameof(NewInstructorLicenses));
+            }
+        }
+
         #region ===== Commands =====
 
         public ICommand DeleteInstructorCommand { get; set; }
+
+        public ICommand AddInstructorCommand { get; set; }  
 
         #endregion
 
@@ -34,6 +62,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             LoadInstructors();
 
             DeleteInstructorCommand = new RelayCommand(DeleteInstructor);   
+            AddInstructorCommand = new RelayCommand(AddInstructor); 
         }
 
         #region ===== Action Methods =====
@@ -51,6 +80,40 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             catch
             {
                 MessageBox.Show("Something went wrong. Instructor has not been deleted.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddInstructor(object obj)
+        {
+            try
+            {
+                List<Category> licenses = new List<Category>();
+
+                foreach (var license in NewInstructorLicenses.Split(',', (char)System.StringSplitOptions.RemoveEmptyEntries))
+                {
+                    Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == license);
+
+                    if (category != null)
+                        licenses.Add(category);
+                    else
+                    {
+                        MessageBox.Show("Something went wrong. One or more licenses entered are invalid. Check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+
+                foreach (var license in licenses)
+                    NewInstructor.Categories.Add(license);
+
+                _db.Instructors.Add(NewInstructor);
+                _db.SaveChanges();
+                MessageBox.Show("Instructor has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+                InstructorsList.Add(NewInstructor);
+                NewInstructor = new Instructor();
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong. Instructor has not been created. Check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
