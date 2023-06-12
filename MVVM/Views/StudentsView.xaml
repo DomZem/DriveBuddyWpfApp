@@ -48,8 +48,9 @@
                                                Text="{Binding FirstName[0]}"/>
                                 </Border>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center"
-                                               Text="{Binding FullName}"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding FirstName}"/>
+                                    <TextBlock VerticalAlignment="Center" Text=" "/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding LastName}"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>

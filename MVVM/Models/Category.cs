@@ -10,33 +10,29 @@
 namespace DriveBuddyWpfApp.MVVM.Models
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Cars = new HashSet<Car>();
-            this.CourseDetails = new HashSet<CourseDetail>();
-            this.Lessons = new HashSet<Lesson>();
-            this.Instructors = new HashSet<Instructor>();
+            this.Cars = new ObservableCollection<Car>();
+            this.CourseDetails = new ObservableCollection<CourseDetail>();
+            this.Lessons = new ObservableCollection<Lesson>();
+            this.Instructors = new ObservableCollection<Instructor>();
         }
     
         public int CategoryID { get; set; }
-
         public string CategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Car> Cars { get; set; }
-
+        public virtual ObservableCollection<Car> Cars { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourseDetail> CourseDetails { get; set; }
-
+        public virtual ObservableCollection<CourseDetail> CourseDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lesson> Lessons { get; set; }
-
+        public virtual ObservableCollection<Lesson> Lessons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Instructor> Instructors { get; set; }
+        public virtual ObservableCollection<Instructor> Instructors { get; set; }
     }
 }

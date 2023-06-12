@@ -11,47 +11,25 @@ namespace DriveBuddyWpfApp.MVVM.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.ObjectModel;
     using System.Linq;
 
     public partial class Lesson
     {
         public int LessonID { get; set; }
-
         public System.DateTime LessonDate { get; set; }
-
         public string Title { get; set; }
-
         public Nullable<byte> HoursNumber { get; set; }
-
         public int CourseCategoryID { get; set; }
-
         public int InstructorID { get; set; }
-
         public int CarID { get; set; }
-
         public int StudentID1 { get; set; }
-
         public Nullable<int> StudentID2 { get; set; }
-
         public Nullable<int> StudentID3 { get; set; }
-    
-        public virtual Car Car { get; set; }
-
-        public virtual Category Category { get; set; }
-
-        public virtual Instructor Instructor { get; set; }
-
-        public virtual Student Student { get; set; }
-
-        public virtual Student Student1 { get; set; }
-
-        public virtual Student Student2 { get; set; }
-
         public string StudentsFullName => GetStudentsFullName();
 
         private string GetStudentsFullName()
-        { 
+        {
             var students = new List<Student>();
 
             if (StudentID1 != 0 && Student != null)
@@ -65,5 +43,12 @@ namespace DriveBuddyWpfApp.MVVM.Models
 
             return string.Join(", ", students.Select(s => s.FullName));
         }
+
+        public virtual Car Car { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Instructor Instructor { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual Student Student1 { get; set; }
+        public virtual Student Student2 { get; set; }
     }
 }

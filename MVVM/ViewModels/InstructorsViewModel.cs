@@ -8,45 +8,15 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
-    public class InstructorsViewModel : ObservableObject
+    public class InstructorsViewModel
     {
         DriveBuddyEntities _db;
 
-        private ObservableCollection<Instructor> _instructorssList;
+        public ObservableCollection<Instructor> InstructorsList { get; set; } = new ObservableCollection<Instructor>();
 
-        public ObservableCollection<Instructor> InstructorsList
-        {
-            get { return _instructorssList; }
-            set
-            {
-                _instructorssList = value;
-                OnPropertyChanged(nameof(InstructorsList));
-            }
-        }
-
-        private Instructor _newInstructor = new Instructor();
-
-        public Instructor NewInstructor
-        {
-            get => _newInstructor;
-            set
-            {
-                _newInstructor = value;
-                OnPropertyChanged(nameof(NewInstructor));
-            }
-        }
-
-        private string _newInstructorLicenses = string.Empty;   
-
-        public string NewInstructorLicenses 
-        {
-            get => _newInstructorLicenses;
-            set
-            {
-                _newInstructorLicenses = value;
-                OnPropertyChanged(nameof(NewInstructorLicenses));
-            }
-        }
+        public Instructor NewInstructor { get; set; } = new Instructor();
+        
+        public string NewInstructorLicenses { get; set; } = string.Empty;
 
         #region ===== Commands =====
 

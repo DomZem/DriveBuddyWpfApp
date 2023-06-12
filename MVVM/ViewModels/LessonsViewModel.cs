@@ -6,22 +6,12 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
-    public class LessonsViewModel : ObservableObject
+    public class LessonsViewModel
     {
         DriveBuddyEntities _db;
 
-        private ObservableCollection<Lesson> _lessonsList;
-
-        public ObservableCollection<Lesson> LessonsList
-        {
-            get => _lessonsList;
-            set
-            {
-                _lessonsList = value;
-                OnPropertyChanged(nameof(LessonsList));
-            }
-        }
-
+        public ObservableCollection<Lesson> LessonsList { get; set; } = new ObservableCollection<Lesson>();
+        
         #region ===== Commands =====
 
         public ICommand DeleteLessonCommand { get; set; }

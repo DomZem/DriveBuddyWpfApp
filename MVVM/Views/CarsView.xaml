@@ -32,7 +32,7 @@
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" 
                   CellStyle="{DynamicResource DataGridCellStyle}" 
                   Style="{DynamicResource DataGridStyle}"
-                  ItemsSource="{Binding CarsList}">
+                  ItemsSource="{Binding CarsList, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding CarID}" IsReadOnly="True" CanUserResize="False" Width="auto"/>
 
@@ -44,7 +44,9 @@
                                     <TextBlock Text="{Binding Mark[0]}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                 </Border>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding FullName}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Mark}" VerticalAlignment="Center"/>
+                                    <TextBlock Text=" " VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Model}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>

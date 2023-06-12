@@ -9,7 +9,8 @@
 
 namespace DriveBuddyWpfApp.MVVM.Models
 {
-    using System.Collections.Generic;
+    using System;
+    using System.Collections.ObjectModel;
     using System.Linq;
 
     public partial class Instructor
@@ -17,28 +18,21 @@ namespace DriveBuddyWpfApp.MVVM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Instructor()
         {
-            this.Lessons = new HashSet<Lesson>();
-            this.Categories = new HashSet<Category>();
+            this.Lessons = new ObservableCollection<Lesson>();
+            this.Categories = new ObservableCollection<Category>();
         }
     
         public int InstructorID { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public string Email { get; set; }
-
         public string Phone { get; set; }
-
         public string FullName => $"{FirstName} {LastName}";
-
         public string Licenses => string.Join(", ", Categories.Select(c => c.CategoryName));
-        
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lesson> Lessons { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ObservableCollection<Lesson> Lessons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ObservableCollection<Category> Categories { get; set; }
     }
 }

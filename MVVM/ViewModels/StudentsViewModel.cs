@@ -8,48 +8,18 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
-    public class StudentsViewModel : ObservableObject
+    public class StudentsViewModel
     {
         DriveBuddyEntities _db;
 
-        private ObservableCollection<Student> _studentsList;
+        public ObservableCollection<Student> StudentsList { get; set; } = new ObservableCollection<Student>();
 
-        public ObservableCollection<Student> StudentsList
-        {
-            get { return _studentsList; }
-            set
-            {
-                _studentsList = value;
-                OnPropertyChanged(nameof(StudentsList));
-            }
-        }
-
-        private Student _newStudent = new Student();        
-
-        public Student NewStudent
-        {
-            get => _newStudent;
-            set
-            {
-                _newStudent = value;
-                OnPropertyChanged(nameof(NewStudent));
-            }
-        }
-
+        public Student NewStudent { get; set; } = new Student();
+        
         public static Student SelectedStudent { get; set; } = new Student();
 
-        private string _newStudentSelectedCourseCategory;
-
-        public string NewStudentSelectedCourseCategory
-        {
-            get => _newStudentSelectedCourseCategory;
-            set
-            {
-                _newStudentSelectedCourseCategory = value;
-                OnPropertyChanged(nameof(NewStudentSelectedCourseCategory));
-            }
-        }
-
+        public string NewStudentSelectedCourseCategory { get; set; } = string.Empty;
+        
         #region ===== Commands =====
 
         public ICommand DeleteStudentCommand { get; set; }  
