@@ -17,7 +17,7 @@ namespace DriveBuddyWpfApp.MVVM.Models
     public partial class Lesson
     {
         public int LessonID { get; set; }
-        public System.DateTime LessonDate { get; set; }
+        public DateTime LessonDate { get; set; }
         public string Title { get; set; }
         public Nullable<byte> HoursNumber { get; set; }
         public int CourseCategoryID { get; set; }
@@ -27,6 +27,7 @@ namespace DriveBuddyWpfApp.MVVM.Models
         public Nullable<int> StudentID2 { get; set; }
         public Nullable<int> StudentID3 { get; set; }
         public string StudentsFullName => GetStudentsFullName();
+        public string LessonDateText => LessonDate.ToString("d");
 
         private string GetStudentsFullName()
         {

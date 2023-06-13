@@ -53,6 +53,7 @@
 
                 <DataGridTextColumn Header="Instructor" Binding="{Binding Instructor.FullName}" IsReadOnly="True" Width="*"/>
                 <DataGridTextColumn Header="Students" Binding="{Binding StudentsFullName}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding LessonDateText}" IsReadOnly="True" Width="*" />
                 <DataGridTextColumn Header="Course category" Binding="{Binding Category.CategoryName}" IsReadOnly="True" Width="*" />
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
