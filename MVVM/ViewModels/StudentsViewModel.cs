@@ -1,6 +1,7 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
 using DriveBuddyWpfApp.MVVM.Views;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -41,6 +42,8 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             AddStudentCommand = new RelayCommand(AddStudent);
             SetSelectedStudentCommand = new RelayCommand(SetSelectedStudent);
             UpdateStudentCommand = new RelayCommand(UpdateStudent);
+
+            NewStudent.BirthDate = DateTime.Now.AddDays(1);
         }
 
         private void LoadStudents() => StudentsList = new ObservableCollection<Student>(_db.Students);
@@ -77,6 +80,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                     MessageBox.Show("Student has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
                     StudentsList.Add(NewStudent);
                     NewStudent = new Student();
+                    NewStudent.BirthDate = DateTime.Now.AddDays(1);
                 }
                 else
                 {

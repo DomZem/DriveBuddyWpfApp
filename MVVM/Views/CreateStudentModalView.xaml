@@ -43,8 +43,8 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Birth date" Style="{StaticResource LabelStyle}" />
-                        <TextBox Text="{Binding NewStudent.BirthDate, StringFormat=dd.MM.yyyy}" 
-                                 Style="{StaticResource TextBoxStyle}" />
+                        <DatePicker Style="{StaticResource DatePickerStyle}"
+                                    SelectedDate="{Binding NewStudent.BirthDate, StringFormat=dd.MM.yyyy}" />
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Margin="10">

@@ -1,6 +1,7 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
 using DriveBuddyWpfApp.MVVM.Views;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -8,7 +9,7 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
-    public class CarsViewModel : ObservableCollection<Car>  
+    public class CarsViewModel 
     {
         DriveBuddyEntities _db;
 
@@ -41,6 +42,8 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             AddCarCommand = new RelayCommand(AddCar);
             SetSelectedCarCommand = new RelayCommand(SetSelectedCar);
             UpdateCarCommand = new RelayCommand(UpdateCar);
+
+            NewCar.ReviewDate = DateTime.Now.AddDays(1);    
         }
 
         #region ===== Action Methods =====
@@ -74,6 +77,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                     _db.SaveChanges();
                     MessageBox.Show("Car has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
                     NewCar = new Car();
+                    NewCar.ReviewDate = DateTime.Now.AddDays(1);
                 }
                 else
                 {
