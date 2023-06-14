@@ -102,6 +102,8 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         {
             try
             {
+                var car = _db.Cars.Find(SelectedCar.CarID);
+                _db.Entry(car).CurrentValues.SetValues(SelectedCar); 
                 _db.SaveChanges();
                 MessageBox.Show($"Car has been updated", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
             }

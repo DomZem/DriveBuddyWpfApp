@@ -105,6 +105,8 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         {
             try
             {
+                var strudent = _db.Students.Find(SelectedStudent.StudentID);
+                _db.Entry(strudent).CurrentValues.SetValues(SelectedStudent);
                 _db.SaveChanges();
                 MessageBox.Show($"Student has been updated", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
             }
