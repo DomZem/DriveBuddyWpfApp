@@ -1,5 +1,6 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
+using DriveBuddyWpfApp.MVVM.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,13 +17,27 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         public Instructor NewInstructor { get; set; } = new Instructor();
         
+        public static Instructor SelectedInstructor { get; set; } = new Instructor();
+
         public string NewInstructorLicenses { get; set; } = string.Empty;
+
+        private string _selectedInstructorLicenses = SelectedInstructor.Licenses;
+
+        public string SelectedInstructorLicenses
+        {
+            get => _selectedInstructorLicenses;
+            set => _selectedInstructorLicenses = value;
+        }
 
         #region ===== Commands =====
 
         public ICommand DeleteInstructorCommand { get; set; }
 
-        public ICommand AddInstructorCommand { get; set; }  
+        public ICommand AddInstructorCommand { get; set; }
+
+        public ICommand SetSelectedInstructorCommand { get; set; }
+
+        public ICommand UpdateInstructorCommand { get; set; }
 
         #endregion
 
@@ -32,7 +47,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             LoadInstructors();
 
             DeleteInstructorCommand = new RelayCommand(DeleteInstructor);   
-            AddInstructorCommand = new RelayCommand(AddInstructor); 
+            AddInstructorCommand = new RelayCommand(AddInstructor);
+            SetSelectedInstructorCommand = new RelayCommand(SetSelectedInstructor);
+            UpdateInstructorCommand = new RelayCommand(UpdateInstructor);
         }
 
         #region ===== Action Methods =====
@@ -84,6 +101,43 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             catch
             {
                 MessageBox.Show("Something went wrong. Instructor has not been created. Check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SetSelectedInstructor(object obj)
+        {
+            var instructor = obj as Instructor;
+            SelectedInstructor = instructor;
+            var updateInstructorModalView = new UpdateInstructorModalView();
+            updateInstructorModalView.ShowDialog();
+        }
+
+        private void UpdateInstructor(object obj)
+        {
+            try
+            {
+                var instructor = _db.Instructors.Find(SelectedInstructor.InstructorID);
+                instructor.Categories.Clear();
+
+                foreach (var license in SelectedInstructorLicenses.Replace(" ", "").Split(','))
+                {
+                    Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == license);
+                    if (category != null)
+                        instructor.Categories.Add(category);
+                    else
+                    {
+                        MessageBox.Show("Something went wrong. One or more licenses entered are invalid. Check your data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+
+                _db.Entry(instructor).CurrentValues.SetValues(SelectedInstructor);
+                _db.SaveChanges();
+                MessageBox.Show($"Instructor has been updated", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong. Instructor has not been updated.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
