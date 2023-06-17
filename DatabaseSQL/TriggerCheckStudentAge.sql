@@ -14,7 +14,7 @@ BEGIN
                 AND DATEDIFF(MONTH, s.BirthDate, GETDATE()) < cd.MinimumMonths)
     )
     BEGIN
-        RAISERROR('Kursant nie spełnia minimalnego wymaganego wieku dla wybranego kursu.', 16, 1)
+        RAISERROR('The student does not meet the minimum age requirement for the selected course.', 16, 1)
         ROLLBACK TRANSACTION;
         RETURN;
     END
