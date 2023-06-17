@@ -10,7 +10,7 @@
 namespace DriveBuddyWpfApp.MVVM.Models
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     using System.Linq;
 
     public partial class Student
@@ -18,10 +18,8 @@ namespace DriveBuddyWpfApp.MVVM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.Lessons = new ObservableCollection<Lesson>();
-            this.Lessons1 = new ObservableCollection<Lesson>();
-            this.Lessons2 = new ObservableCollection<Lesson>();
-            this.CourseDetails = new ObservableCollection<CourseDetail>();
+            this.Lessons = new HashSet<Lesson>();
+            this.CourseDetails = new HashSet<CourseDetail>();
         }
     
         public int StudentID { get; set; }
@@ -29,7 +27,7 @@ namespace DriveBuddyWpfApp.MVVM.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public DateTime BirthDate { get; set; }
+        public System.DateTime BirthDate { get; set; }
         public string BirthDateText => BirthDate.ToString("d");
         public string FullName => $"{FirstName} {LastName}";
 
@@ -47,12 +45,8 @@ namespace DriveBuddyWpfApp.MVVM.Models
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<Lesson> Lessons { get; set; }
+        public virtual ICollection<Lesson> Lessons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<Lesson> Lessons1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<Lesson> Lessons2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<CourseDetail> CourseDetails { get; set; }
+        public virtual ICollection<CourseDetail> CourseDetails { get; set; }
     }
 }

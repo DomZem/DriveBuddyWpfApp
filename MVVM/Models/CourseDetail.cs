@@ -10,14 +10,14 @@
 namespace DriveBuddyWpfApp.MVVM.Models
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class CourseDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CourseDetail()
         {
-            this.Students = new ObservableCollection<Student>();
+            this.Students = new HashSet<Student>();
         }
     
         public int CourseDetailID { get; set; }
@@ -28,6 +28,6 @@ namespace DriveBuddyWpfApp.MVVM.Models
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<Student> Students { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

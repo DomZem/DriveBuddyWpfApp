@@ -126,15 +126,11 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                                                     !c.Lessons.Any(l => DbFunctions.TruncateTime(l.LessonDate) == selectedDate))
                                         .ToList();
 
-                
-
                 foreach (var instructor in availableInstructors)
                     AvaiableInstructors.Add(instructor);
 
                 foreach (var student in availableStudents)
                     AvaiableStudents.Add(student);
-
-                AvaiableStudents.Add(null);
 
                 foreach (var car in availableCars)
                     AvaiableCars.Add(car);

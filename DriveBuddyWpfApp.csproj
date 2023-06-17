@@ -303,8 +303,8 @@
     <Content Include="DatabaseSQL\TriggerDeleteLessonsOnInstructorLicenseChange.sql" />
     <Content Include="MVVM\Models\DriveBuddyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DriveBuddyModel.Context.cs</LastGenOutput>
       <DependentUpon>DriveBuddyModel.edmx</DependentUpon>
+      <LastGenOutput>DriveBuddyModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="MVVM\Models\DriveBuddyModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

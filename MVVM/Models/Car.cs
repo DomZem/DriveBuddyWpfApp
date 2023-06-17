@@ -10,21 +10,21 @@
 namespace DriveBuddyWpfApp.MVVM.Models
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class Car
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Car()
         {
-            this.Lessons = new ObservableCollection<Lesson>();
+            this.Lessons = new HashSet<Lesson>();
         }
     
         public int CarID { get; set; }
         public string Mark { get; set; }
         public string Model { get; set; }
         public string RegistrationNumber { get; set; }
-        public DateTime ReviewDate { get; set; }
+        public System.DateTime ReviewDate { get; set; }
         public int CategoryID { get; set; }
         public string CourseCategory => Category.CategoryName;
         public string ReviewDateText => ReviewDate.ToString("d");
@@ -32,6 +32,6 @@ namespace DriveBuddyWpfApp.MVVM.Models
 
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<Lesson> Lessons { get; set; }
+        public virtual ICollection<Lesson> Lessons { get; set; }
     }
 }

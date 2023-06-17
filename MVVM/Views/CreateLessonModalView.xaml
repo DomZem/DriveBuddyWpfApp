@@ -45,21 +45,13 @@
                         <DatePicker Style="{StaticResource DatePickerStyle}"
                                     SelectedDate="{Binding NewLesson.LessonDate, StringFormat=dd.MM.yyyy}" />
                     </StackPanel>
-                    
+
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Car" Style="{StaticResource LabelStyle}" />
                         <ComboBox Style="{StaticResource ComboBoxStyle}"
                                   ItemsSource="{Binding AvaiableCars}"
                                   DisplayMemberPath="FullName" 
                                   SelectedValue="{Binding NewLesson.Car}" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
-                        <TextBlock Text="Second student" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}" 
-                                  ItemsSource="{Binding AvaiableStudents}"
-                                  DisplayMemberPath="FullName"
-                                  SelectedValue="{Binding NewLesson.Student1}" />
                     </StackPanel>
                 </StackPanel>
 
@@ -96,21 +88,13 @@
                                   SelectedValue="{Binding NewLesson.Instructor}"
                                   DisplayMemberPath="FullName" />
                     </StackPanel>
-                    
+
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
-                        <TextBlock Text="First student" Style="{StaticResource LabelStyle}" />
+                        <TextBlock Text="Student" Style="{StaticResource LabelStyle}" />
                         <ComboBox Style="{StaticResource ComboBoxStyle}"
                                   ItemsSource="{Binding AvaiableStudents}"
                                   DisplayMemberPath="FullName" 
                                   SelectedValue="{Binding NewLesson.Student}" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
-                        <TextBlock Text="Third student" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}"
-                                  ItemsSource="{Binding AvaiableStudents}"
-                                  DisplayMemberPath="FullName"
-                                  SelectedValue="{Binding NewLesson.Student2}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

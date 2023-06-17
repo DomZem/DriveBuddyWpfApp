@@ -70,9 +70,7 @@
           <Property Name="CourseCategoryID" Type="int" Nullable="false" />
           <Property Name="InstructorID" Type="int" Nullable="false" />
           <Property Name="CarID" Type="int" Nullable="false" />
-          <Property Name="StudentID1" Type="int" Nullable="false" />
-          <Property Name="StudentID2" Type="int" />
-          <Property Name="StudentID3" Type="int" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -201,39 +199,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Lessons_Students_StudentID1">
-          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+        <Association Name="FK_Lessons_Students_StudentID">
+          <End Role="Students" Type="Self.Students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Students">
               <PropertyRef Name="StudentID" />
             </Principal>
             <Dependent Role="Lessons">
-              <PropertyRef Name="StudentID1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lessons_Students_StudentID2">
-          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
-          <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
               <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Lessons">
-              <PropertyRef Name="StudentID2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lessons_Students_StudentID3">
-          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
-          <End Role="Lessons" Type="Self.Lessons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Lessons">
-              <PropertyRef Name="StudentID3" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -282,15 +258,7 @@
             <End Role="Instructors" EntitySet="Instructors" />
             <End Role="Lessons" EntitySet="Lessons" />
           </AssociationSet>
-          <AssociationSet Name="FK_Lessons_Students_StudentID1" Association="Self.FK_Lessons_Students_StudentID1">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Lessons" EntitySet="Lessons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lessons_Students_StudentID2" Association="Self.FK_Lessons_Students_StudentID2">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Lessons" EntitySet="Lessons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lessons_Students_StudentID3" Association="Self.FK_Lessons_Students_StudentID3">
+          <AssociationSet Name="FK_Lessons_Students_StudentID" Association="Self.FK_Lessons_Students_StudentID">
             <End Role="Students" EntitySet="Students" />
             <End Role="Lessons" EntitySet="Lessons" />
           </AssociationSet>
@@ -359,15 +327,11 @@
           <Property Name="CourseCategoryID" Type="Int32" Nullable="false" />
           <Property Name="InstructorID" Type="Int32" Nullable="false" />
           <Property Name="CarID" Type="Int32" Nullable="false" />
-          <Property Name="StudentID1" Type="Int32" Nullable="false" />
-          <Property Name="StudentID2" Type="Int32" />
-          <Property Name="StudentID3" Type="Int32" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Car" Relationship="Self.FK_Lessons_Cars" FromRole="Lessons" ToRole="Cars" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Lessons_Categories" FromRole="Lessons" ToRole="Categories" />
           <NavigationProperty Name="Instructor" Relationship="Self.FK_Lessons_Instructors" FromRole="Lessons" ToRole="Instructors" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_Lessons_Students_StudentID1" FromRole="Lessons" ToRole="Students" />
-          <NavigationProperty Name="Student1" Relationship="Self.FK_Lessons_Students_StudentID2" FromRole="Lessons" ToRole="Students" />
-          <NavigationProperty Name="Student2" Relationship="Self.FK_Lessons_Students_StudentID3" FromRole="Lessons" ToRole="Students" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Lessons_Students_StudentID" FromRole="Lessons" ToRole="Students" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -379,9 +343,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Students_StudentID1" FromRole="Students" ToRole="Lessons" />
-          <NavigationProperty Name="Lessons1" Relationship="Self.FK_Lessons_Students_StudentID2" FromRole="Students" ToRole="Lessons" />
-          <NavigationProperty Name="Lessons2" Relationship="Self.FK_Lessons_Students_StudentID3" FromRole="Students" ToRole="Lessons" />
+          <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Students_StudentID" FromRole="Students" ToRole="Lessons" />
           <NavigationProperty Name="CourseDetails" Relationship="Self.Courses" FromRole="Students" ToRole="CourseDetails" />
         </EntityType>
         <Association Name="FK_Cars_Categories">
@@ -448,39 +410,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Lessons_Students_StudentID1">
-          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+        <Association Name="FK_Lessons_Students_StudentID">
+          <End Role="Students" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Lessons" Type="Self.Lesson" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Students">
               <PropertyRef Name="StudentID" />
             </Principal>
             <Dependent Role="Lessons">
-              <PropertyRef Name="StudentID1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lessons_Students_StudentID2">
-          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
-          <End Role="Lessons" Type="Self.Lesson" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
               <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Lessons">
-              <PropertyRef Name="StudentID2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lessons_Students_StudentID3">
-          <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
-          <End Role="Lessons" Type="Self.Lesson" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Students">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Lessons">
-              <PropertyRef Name="StudentID3" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -519,15 +459,7 @@
             <End Role="Instructors" EntitySet="Instructors" />
             <End Role="Lessons" EntitySet="Lessons" />
           </AssociationSet>
-          <AssociationSet Name="FK_Lessons_Students_StudentID1" Association="Self.FK_Lessons_Students_StudentID1">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Lessons" EntitySet="Lessons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lessons_Students_StudentID2" Association="Self.FK_Lessons_Students_StudentID2">
-            <End Role="Students" EntitySet="Students" />
-            <End Role="Lessons" EntitySet="Lessons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lessons_Students_StudentID3" Association="Self.FK_Lessons_Students_StudentID3">
+          <AssociationSet Name="FK_Lessons_Students_StudentID" Association="Self.FK_Lessons_Students_StudentID">
             <End Role="Students" EntitySet="Students" />
             <End Role="Lessons" EntitySet="Lessons" />
           </AssociationSet>
@@ -598,9 +530,7 @@
                 <ScalarProperty Name="CourseCategoryID" ColumnName="CourseCategoryID" />
                 <ScalarProperty Name="InstructorID" ColumnName="InstructorID" />
                 <ScalarProperty Name="CarID" ColumnName="CarID" />
-                <ScalarProperty Name="StudentID1" ColumnName="StudentID1" />
-                <ScalarProperty Name="StudentID2" ColumnName="StudentID2" />
-                <ScalarProperty Name="StudentID3" ColumnName="StudentID3" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

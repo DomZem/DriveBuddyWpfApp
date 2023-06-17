@@ -4,21 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5fc4e0ea8f4c43fa824445f49ec0455a" Name="Diagram1">
-        <EntityTypeShape EntityType="DriveBuddyModel.Car" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DriveBuddyModel.Category" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DriveBuddyModel.CourseDetail" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DriveBuddyModel.Instructor" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DriveBuddyModel.Lesson" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DriveBuddyModel.Student" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+      <Diagram DiagramId="501914c1644a4a9fb81a0dd87ce1b6be" Name="Diagram1">
+        <EntityTypeShape EntityType="DriveBuddyModel.Car" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DriveBuddyModel.Category" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DriveBuddyModel.CourseDetail" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DriveBuddyModel.Instructor" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DriveBuddyModel.Lesson" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DriveBuddyModel.Student" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="DriveBuddyModel.FK_Cars_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="DriveBuddyModel.FK_Lessons_Cars" ManuallyRouted="false" />
         <AssociationConnector Association="DriveBuddyModel.FK_CourseDetails_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="DriveBuddyModel.FK_Lessons_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="DriveBuddyModel.FK_Lessons_Instructors" ManuallyRouted="false" />
-        <AssociationConnector Association="DriveBuddyModel.FK_Lessons_Students_StudentID1" ManuallyRouted="false" />
-        <AssociationConnector Association="DriveBuddyModel.FK_Lessons_Students_StudentID2" ManuallyRouted="false" />
-        <AssociationConnector Association="DriveBuddyModel.FK_Lessons_Students_StudentID3" ManuallyRouted="false" />
+        <AssociationConnector Association="DriveBuddyModel.FK_Lessons_Students_StudentID" ManuallyRouted="false" />
         <AssociationConnector Association="DriveBuddyModel.Courses" ManuallyRouted="false" />
         <AssociationConnector Association="DriveBuddyModel.InstructorsCategories" ManuallyRouted="false" />
       </Diagram>
