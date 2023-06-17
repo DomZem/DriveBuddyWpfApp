@@ -38,22 +38,48 @@ BEGIN
         RETURN
     END
 
-    -- Check if the Students are enrolled in the same CourseCategoryID as in the Lessons table
+    -- Check if the Student is enrolled in the same CourseCategoryID as in the Lessons table
     IF EXISTS (
             SELECT *
             FROM Lessons AS l
-            INNER JOIN Courses AS c ON l.StudentID1 = c.StudentID
-            LEFT JOIN Courses AS c2 ON l.StudentID2 = c2.StudentID
-            LEFT JOIN Courses AS c3 ON l.StudentID3 = c3.StudentID
+            INNER JOIN Students AS s ON l.StudentID = s.StudentID
+            INNER JOIN Courses AS c ON s.StudentID = c.StudentID
+            INNER JOIN CourseDetails AS cd ON c.CourseDetailID = cd.CourseDetailID
             WHERE l.LessonID IN (SELECT LessonID FROM inserted)
-                AND (
-                    c.CourseDetailID NOT IN (SELECT CourseDetailID FROM CourseDetails WHERE CategoryID = l.CourseCategoryID)
-                    OR (c2.CourseDetailID IS NOT NULL AND c2.CourseDetailID NOT IN (SELECT CourseDetailID FROM CourseDetails WHERE CategoryID = l.CourseCategoryID))
-                    OR (c3.CourseDetailID IS NOT NULL AND c3.CourseDetailID NOT IN (SELECT CourseDetailID FROM CourseDetails WHERE CategoryID = l.CourseCategoryID))
-                    )
+                AND cd.CategoryID != l.CourseCategoryID
             )
     BEGIN
-        RAISERROR('One or more Students are not enrolled in the same CourseCategoryID as in the Lessons table.', 16, 1)
+        RAISERROR('The Student does not have the selected driver''s license category.', 16, 1)
+        ROLLBACK
+        RETURN
+    END
+
+    -- Check if the Car has exceeded the lesson limit for the given day
+    IF EXISTS (
+            SELECT l.CarID
+            FROM Lessons l
+            INNER JOIN inserted i ON l.LessonDate = i.LessonDate
+            WHERE l.CarID IN (SELECT CarID FROM inserted)
+            GROUP BY l.CarID
+            HAVING COUNT(*) > 3
+            )
+    BEGIN
+        RAISERROR('The Car has exceeded the lesson limit for the given day.', 16, 1)
+        ROLLBACK
+        RETURN
+    END
+
+    -- Check if the Instructor has exceeded the lesson limit for the given day
+    IF EXISTS (
+            SELECT l.InstructorID
+            FROM Lessons l
+            INNER JOIN inserted i ON l.LessonDate = i.LessonDate
+            WHERE l.InstructorID IN (SELECT InstructorID FROM inserted)
+            GROUP BY l.InstructorID
+            HAVING COUNT(*) > 3
+            )
+    BEGIN
+        RAISERROR('The Instructor has exceeded the lesson limit for the given day.', 16, 1)
         ROLLBACK
         RETURN
     END

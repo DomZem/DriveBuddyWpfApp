@@ -66,8 +66,8 @@ INSERT INTO Cars VALUES('Hyundai', 'i20', 'KRK2342', GETDATE()+300, 11);
 INSERT INTO Cars VALUES('Hyundai', 'i20', 'KRK5331', GETDATE()+400, 5);
 
 -- Lessons
-INSERT INTO Lessons VALUES (GETDATE()+1, 'Jazda po mieście', 3, 5, 1, 1, 1, 2, NULL);
-INSERT INTO Lessons VALUES (GETDATE()+1, 'Jazda po mieście', 3, 11, 2, 2, 3, NULL, NULL);
-INSERT INTO Lessons VALUES (GETDATE()+2, 'Jazda po placu manewrowym', 3, 5, 1, 4, 1, NULL, NULL);
-INSERT INTO Lessons VALUES (GETDATE()+2, 'Jazda po placu manewrowym', 3, 11, 2, 3, 3, NULL, NULL);
-INSERT INTO Lessons VALUES (GETDATE()+3, 'Jazda po mieście', 3, 5, 2, 1, 2, NULL, NULL);
+INSERT INTO Lessons VALUES (GETDATE()+1, 'Jazda po mieście', 3, 5, 1, 1, 1);
+INSERT INTO Lessons VALUES (GETDATE()+1, 'Jazda po mieście', 3, 11, 2, 2, 3);
+INSERT INTO Lessons VALUES (GETDATE()+2, 'Jazda po placu manewrowym', 3, 5, 1, 4, 1);
+INSERT INTO Lessons VALUES (GETDATE()+2, 'Jazda po placu manewrowym', 3, 11, 2, 3, 3);
+INSERT INTO Lessons VALUES (GETDATE()+3, 'Jazda po mieście', 3, 5, 2, 1, 2);
