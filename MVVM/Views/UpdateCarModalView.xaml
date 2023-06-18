@@ -49,7 +49,8 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Review date" Style="{StaticResource LabelStyle}" />
-                        <TextBox Text="{Binding SelectedCar.ReviewDate}" Style="{StaticResource TextBoxStyle}" />
+                        <DatePicker Style="{StaticResource DatePickerStyle}"
+                                    SelectedDate="{Binding SelectedCar.ReviewDate, StringFormat=dd.MM.yyyy}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>
