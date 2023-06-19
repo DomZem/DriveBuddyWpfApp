@@ -46,6 +46,8 @@ INSERT INTO InstructorsCategories VALUES(1, 6);
 INSERT INTO InstructorsCategories VALUES(1, 7);
 INSERT INTO InstructorsCategories VALUES(2, 5);
 INSERT INTO InstructorsCategories VALUES(2, 11);
+INSERT INTO InstructorsCategories VALUES(3, 2);
+INSERT INTO InstructorsCategories VALUES(4, 1);
 
 -- Students
 INSERT INTO Students VALUES('Grzegorz', 'Wilk', 'grzegorz.wilk@gmail.com', '816303016', '2002-11-16');
