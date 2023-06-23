@@ -9,17 +9,37 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
-    public class InstructorsViewModel
+    public class InstructorsViewModel : ObservableObject
     {
         DriveBuddyEntities _db;
 
         public ObservableCollection<Instructor> InstructorsList { get; set; } = new ObservableCollection<Instructor>();
 
-        public Instructor NewInstructor { get; set; } = new Instructor();
-        
+        private Instructor _newInstructor = new Instructor();
+
+        public Instructor NewInstructor
+        {
+            get => _newInstructor;  
+            set
+            {
+                _newInstructor = value;
+                OnPropertyChanged(nameof(NewInstructor));
+            }
+        }
+ 
         public static Instructor SelectedInstructor { get; set; } = new Instructor();
 
-        public string NewInstructorLicenses { get; set; } = string.Empty;
+        public string _newInstructorLicenses = string.Empty;
+    
+        public string NewInstructorLicenses
+        {
+            get => _newInstructorLicenses;
+            set  
+            {
+                _newInstructorLicenses = value;
+                OnPropertyChanged(nameof(NewInstructorLicenses));
+            }
+        }
 
         private string _selectedInstructorLicenses = SelectedInstructor.Licenses;
 
@@ -97,6 +117,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 MessageBox.Show("Instructor has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
                 InstructorsList.Add(NewInstructor);
                 NewInstructor = new Instructor();
+                NewInstructorLicenses = string.Empty;
             }
             catch
             {

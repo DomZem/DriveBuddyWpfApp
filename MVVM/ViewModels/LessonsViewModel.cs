@@ -20,7 +20,19 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         public ObservableCollection<Car> AvaiableCars { get; set; } = new ObservableCollection<Car>();
 
-        public Lesson NewLesson { get; set; } = new Lesson();
+        #region ===== New Lesson Properties =====
+
+        private Lesson _newLesson = new Lesson();
+
+        public Lesson NewLesson
+        {
+            get => _newLesson;
+            set
+            {
+                _newLesson = value;
+                OnPropertyChanged(nameof(NewLesson));
+            }
+        }
 
         private string _newLessonSelectedCourseCategory = string.Empty;
 
@@ -53,6 +65,8 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 }
             }
         }
+
+        #endregion
 
         #region ===== Commands =====
 
@@ -103,6 +117,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                     _db.SaveChanges();
                     MessageBox.Show("Lesson has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
                     NewLesson = new Lesson();
+                    GetAvailableLessonMembers();
                 }
                 else
                 {

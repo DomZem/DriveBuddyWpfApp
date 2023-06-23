@@ -9,17 +9,31 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
-    public class CarsViewModel 
+    public class CarsViewModel : ObservableObject
     {
         DriveBuddyEntities _db;
 
         public ObservableCollection<Car> CarsList { get; set; } = new ObservableCollection<Car>();
 
+        public static Car SelectedCar { get; set; } = new Car();
+
+        #region ===== New Car Properties =====
+
         public string NewCarSelectedCourseCategory { get; set; } = string.Empty;
 
-        public Car NewCar { get; set; } = new Car();
-        
-        public static Car SelectedCar { get; set; } = new Car();
+        private Car _newCar = new Car();
+
+        public Car NewCar
+        {
+            get => _newCar;
+            set
+            {
+                _newCar = value;    
+                OnPropertyChanged(nameof(NewCar));
+            }
+        }
+
+        #endregion
 
         #region ===== Commands =====
 
@@ -76,8 +90,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                     _db.Cars.Add(NewCar);
                     _db.SaveChanges();
                     MessageBox.Show("Car has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
-                    NewCar = new Car();
-                    NewCar.ReviewDate = DateTime.Now.AddDays(1);
+                    NewCar = new Car() { ReviewDate = DateTime.Now };
                 }
                 else
                 {

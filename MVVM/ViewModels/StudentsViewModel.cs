@@ -9,18 +9,43 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
-    public class StudentsViewModel
+    public class StudentsViewModel : ObservableObject
     {
         DriveBuddyEntities _db;
 
         public ObservableCollection<Student> StudentsList { get; set; } = new ObservableCollection<Student>();
 
-        public Student NewStudent { get; set; } = new Student();
-        
         public static Student SelectedStudent { get; set; } = new Student();
 
-        public string NewStudentSelectedCourseCategory { get; set; } = string.Empty;
+        #region ===== New Student Properties =====
+
+        public Student _newStudent = new Student();
         
+        public Student NewStudent
+        {
+            get => _newStudent;
+            set
+            {
+                _newStudent = value;
+                OnPropertyChanged(nameof(NewStudent));
+            }
+        }
+
+
+        public string _newStudentSelectedCourseCategory = string.Empty;
+        
+        public string NewStudentSelectedCourseCategory
+        {
+            get => _newStudentSelectedCourseCategory;
+            set
+            {
+                _newStudentSelectedCourseCategory = value;
+                OnPropertyChanged(nameof(NewStudentSelectedCourseCategory));
+            }
+        }
+
+        #endregion
+
         #region ===== Commands =====
 
         public ICommand DeleteStudentCommand { get; set; }  
@@ -79,8 +104,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                     _db.SaveChanges();
                     MessageBox.Show("Student has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
                     StudentsList.Add(NewStudent);
-                    NewStudent = new Student();
-                    NewStudent.BirthDate = DateTime.Now.AddDays(1);
+                    NewStudent = new Student() { BirthDate = DateTime.Now.AddDays(1) };
                 }
                 else
                 {
