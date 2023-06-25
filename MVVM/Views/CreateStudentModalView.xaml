@@ -58,26 +58,10 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Course category" Style="{StaticResource LabelStyle}" />
-                        <ComboBox SelectedValue="{Binding NewStudentSelectedCourseCategory, Mode=TwoWay}" 
-                                  SelectedValuePath="Content" 
-                                  Style="{StaticResource ComboBoxStyle}">
-                            <ComboBoxItem>AM</ComboBoxItem>
-                            <ComboBoxItem>A1</ComboBoxItem>
-                            <ComboBoxItem>A2</ComboBoxItem>
-                            <ComboBoxItem>A</ComboBoxItem>
-                            <ComboBoxItem>B1</ComboBoxItem>
-                            <ComboBoxItem>B</ComboBoxItem>
-                            <ComboBoxItem>C1</ComboBoxItem>
-                            <ComboBoxItem>C</ComboBoxItem>
-                            <ComboBoxItem>D1</ComboBoxItem>
-                            <ComboBoxItem>D</ComboBoxItem>
-                            <ComboBoxItem>BE</ComboBoxItem>
-                            <ComboBoxItem>C1E</ComboBoxItem>
-                            <ComboBoxItem>CE</ComboBoxItem>
-                            <ComboBoxItem>D1E</ComboBoxItem>
-                            <ComboBoxItem>DE</ComboBoxItem>
-                            <ComboBoxItem>T</ComboBoxItem>
-                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding CategoriesList}"
+                                  DisplayMemberPath="CategoryName"
+                                  SelectedItem="{Binding NewStudentCourseCategory}"
+                                  Style="{StaticResource ComboBoxStyle}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

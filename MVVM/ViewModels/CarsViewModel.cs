@@ -15,11 +15,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         public ObservableCollection<Car> CarsList { get; set; } = new ObservableCollection<Car>();
 
-        public static Car SelectedCar { get; set; } = new Car();
+        public ObservableCollection<Category> CategoriesList { get; set; } = new ObservableCollection<Category>();
 
-        #region ===== New Car Properties =====
-
-        public string NewCarSelectedCourseCategory { get; set; } = string.Empty;
+        public Car SelectedCar { get; set; } = new Car();
 
         private Car _newCar = new Car();
 
@@ -32,8 +30,6 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 OnPropertyChanged(nameof(NewCar));
             }
         }
-
-        #endregion
 
         #region ===== Commands =====
 
@@ -50,7 +46,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         public CarsViewModel()
         {
             _db = new DriveBuddyEntities();
-            LoadCars();
+            LoadData();
 
             DeleteCarCommand = new RelayCommand(DeleteCar);
             AddCarCommand = new RelayCommand(AddCar);
@@ -82,7 +78,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         {
             try
             {
-                Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == NewCarSelectedCourseCategory);
+                Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == NewCar.Category.CategoryName);
 
                 if (category != null)
                 {
@@ -108,6 +104,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             var car = obj as Car;
             SelectedCar = car;
             var updateCarModalView = new UpdateCarModalView();
+            updateCarModalView.DataContext = this;
             updateCarModalView.ShowDialog();
         }
 
@@ -128,6 +125,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #endregion
 
-        private void LoadCars() => CarsList = new ObservableCollection<Car>(_db.Cars);
+        private void LoadData() 
+        { 
+            CarsList = new ObservableCollection<Car>(_db.Cars);
+            CategoriesList = new ObservableCollection<Category>(_db.Categories);
+        } 
     }
 }

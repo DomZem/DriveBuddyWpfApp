@@ -15,10 +15,12 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         public ObservableCollection<Student> StudentsList { get; set; } = new ObservableCollection<Student>();
 
-        public static Student SelectedStudent { get; set; } = new Student();
+        public ObservableCollection<Category> CategoriesList { get; set; } = new ObservableCollection<Category>();
 
-        #region ===== New Student Properties =====
+        public Student SelectedStudent { get; set; } = new Student();
 
+        public Category NewStudentCourseCategory { get; set; } = new Category();
+        
         public Student _newStudent = new Student();
         
         public Student NewStudent
@@ -30,21 +32,6 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 OnPropertyChanged(nameof(NewStudent));
             }
         }
-
-
-        public string _newStudentSelectedCourseCategory = string.Empty;
-        
-        public string NewStudentSelectedCourseCategory
-        {
-            get => _newStudentSelectedCourseCategory;
-            set
-            {
-                _newStudentSelectedCourseCategory = value;
-                OnPropertyChanged(nameof(NewStudentSelectedCourseCategory));
-            }
-        }
-
-        #endregion
 
         #region ===== Commands =====
 
@@ -61,7 +48,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         public StudentsViewModel()
         {
             _db = new DriveBuddyEntities();
-            LoadStudents();
+            LoadData();
 
             DeleteStudentCommand = new RelayCommand(DeleteStudent); 
             AddStudentCommand = new RelayCommand(AddStudent);
@@ -71,7 +58,6 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             NewStudent.BirthDate = DateTime.Now.AddDays(1);
         }
 
-        private void LoadStudents() => StudentsList = new ObservableCollection<Student>(_db.Students);
 
         #region ===== Action Methods =====
 
@@ -95,7 +81,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         {
             try
             {
-                CourseDetail courseDetail = _db.CourseDetails.FirstOrDefault(cd => cd.Category.CategoryName == NewStudentSelectedCourseCategory);
+                CourseDetail courseDetail = _db.CourseDetails.FirstOrDefault(cd => cd.Category.CategoryName == NewStudentCourseCategory.CategoryName);
 
                 if (courseDetail != null)
                 {
@@ -122,6 +108,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             var student = obj as Student;
             SelectedStudent = student;
             var updateStudentModalView = new UpdateStudentModalView();
+            updateStudentModalView.DataContext = this;
             updateStudentModalView.ShowDialog();  
         }
 
@@ -141,5 +128,11 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         }
 
         #endregion
+
+        private void LoadData() 
+        { 
+            StudentsList = new ObservableCollection<Student>(_db.Students);
+            CategoriesList = new ObservableCollection<Category>(_db.Categories);
+        } 
     }
 }
