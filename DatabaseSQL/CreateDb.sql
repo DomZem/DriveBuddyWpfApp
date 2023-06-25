@@ -1,4 +1,10 @@
-﻿CREATE TABLE Instructors (
+﻿CREATE DATABASE DriveBuddy
+GO
+
+USE DriveBuddy
+GO
+
+CREATE TABLE Instructors (
 	InstructorID INT IDENTITY(1, 1) PRIMARY KEY,
 	FirstName VARCHAR(30) NOT NULL,
 	LastName VARCHAR(50) NOT NULL,

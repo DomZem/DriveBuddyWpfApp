@@ -26,29 +26,11 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 OnPropertyChanged(nameof(NewInstructor));
             }
         }
- 
-        public static Instructor SelectedInstructor { get; set; } = new Instructor();
 
-        public string _newInstructorLicenses = string.Empty;
-    
-        public string NewInstructorLicenses
-        {
-            get => _newInstructorLicenses;
-            set  
-            {
-                _newInstructorLicenses = value;
-                OnPropertyChanged(nameof(NewInstructorLicenses));
-            }
-        }
+        public Instructor SelectedInstructor { get; set; } = new Instructor();
 
-        private string _selectedInstructorLicenses = SelectedInstructor.Licenses;
-
-        public string SelectedInstructorLicenses
-        {
-            get => _selectedInstructorLicenses;
-            set => _selectedInstructorLicenses = value;
-        }
-
+        public string InstructorLicenses { get; set; } = string.Empty;
+       
         #region ===== Commands =====
 
         public ICommand DeleteInstructorCommand { get; set; }
@@ -96,7 +78,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             {
                 List<Category> licenses = new List<Category>();
 
-                foreach (var license in NewInstructorLicenses.Split(',', (char)System.StringSplitOptions.RemoveEmptyEntries))
+                foreach (var license in InstructorLicenses.Replace(" ", "").Split(','))
                 {
                     Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == license);
 
@@ -117,7 +99,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 MessageBox.Show("Instructor has been created", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
                 InstructorsList.Add(NewInstructor);
                 NewInstructor = new Instructor();
-                NewInstructorLicenses = string.Empty;
+                InstructorLicenses = string.Empty;
             }
             catch
             {
@@ -129,7 +111,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         {
             var instructor = obj as Instructor;
             SelectedInstructor = instructor;
+            InstructorLicenses = string.Join(", ", SelectedInstructor.Licenses);
             var updateInstructorModalView = new UpdateInstructorModalView();
+            updateInstructorModalView.DataContext = this;
             updateInstructorModalView.ShowDialog();
         }
 
@@ -140,9 +124,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 var instructor = _db.Instructors.Find(SelectedInstructor.InstructorID);
                 instructor.Categories.Clear();
 
-                foreach (var license in SelectedInstructorLicenses.Replace(" ", "").Split(','))
+                foreach (var license in InstructorLicenses.Replace(" ", "").Split(','))
                 {
                     Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == license);
+
                     if (category != null)
                         instructor.Categories.Add(category);
                     else
