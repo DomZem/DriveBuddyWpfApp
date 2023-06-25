@@ -8,5 +8,7 @@ namespace DriveBuddyWpfApp.MVVM.Views
         {
             InitializeComponent();
         }
+
+        private void CloseModalBtn_Click(object sender, RoutedEventArgs e) => this.Close(); 
     }
 }

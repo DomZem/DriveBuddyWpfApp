@@ -36,87 +36,61 @@
                 <StackPanel Grid.Column="1" Margin="10">
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Title" Style="{StaticResource LabelStyle}" />
-                        <TextBox Style="{StaticResource TextBoxStyle}" />
+                        <TextBox Text="{Binding SelectedLesson.Title}" 
+                                 Style="{StaticResource TextBoxStyle}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Date" Style="{StaticResource LabelStyle}" />
-                        <DatePicker Style="{StaticResource DatePickerStyle}"/>
+                        <DatePicker SelectedDate="{Binding LessonDate, StringFormat=dd.MM.yyyy}"
+                                    Style="{StaticResource DatePickerStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Car" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}">
-                            <ComboBoxItem>Toyota Yaris</ComboBoxItem>
-                            <ComboBoxItem>Hyundai i20</ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
-                        <TextBlock Text="Second student" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}">
-                            <ComboBoxItem>Cristiano Ronaldo</ComboBoxItem>
-                            <ComboBoxItem>Robert Lewandowski</ComboBoxItem>
-                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding AvaiableCars}"
+                                  SelectedItem="{Binding SelectedLesson.Car}"
+                                  DisplayMemberPath="FullName"
+                                  Style="{StaticResource ComboBoxStyle}" />
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Margin="10">
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Course category" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}">
-                            <ComboBoxItem>AM</ComboBoxItem>
-                            <ComboBoxItem>A</ComboBoxItem>
-                            <ComboBoxItem>A1</ComboBoxItem>
-                            <ComboBoxItem>A2</ComboBoxItem>
-                            <ComboBoxItem>B1</ComboBoxItem>
-                            <ComboBoxItem>B</ComboBoxItem>
-                            <ComboBoxItem>B+E</ComboBoxItem>
-                            <ComboBoxItem>C</ComboBoxItem>
-                            <ComboBoxItem>C1</ComboBoxItem>
-                            <ComboBoxItem>C1+E</ComboBoxItem>
-                            <ComboBoxItem>C+E</ComboBoxItem>
-                            <ComboBoxItem>D</ComboBoxItem>
-                            <ComboBoxItem>D1</ComboBoxItem>
-                            <ComboBoxItem>D1+E</ComboBoxItem>
-                            <ComboBoxItem>D+E</ComboBoxItem>
-                            <ComboBoxItem>T</ComboBoxItem>
-                        </ComboBox>
+                        <ComboBox Style="{StaticResource ComboBoxStyle}" 
+                                  SelectedItem="{Binding LessonCourseCategory}"
+                                  ItemsSource="{Binding CategoriesList}"
+                                  DisplayMemberPath="CategoryName"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Instructor" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}">
-                            <ComboBoxItem>Jan Kowalski</ComboBoxItem>
-                            <ComboBoxItem>Piotr Nowak</ComboBoxItem>
-                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding AvaiableInstructors}"
+                                  SelectedItem="{Binding SelectedLesson.Instructor}"
+                                  DisplayMemberPath="FullName"
+                                  Style="{StaticResource ComboBoxStyle}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
-                        <TextBlock Text="First student" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}">
-                            <ComboBoxItem>Cristiano Ronaldo</ComboBoxItem>
-                            <ComboBoxItem>Robert Lewandowski</ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="0 0 0 5">
-                        <TextBlock Text="Third student" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}">
-                            <ComboBoxItem>Cristiano Ronaldo</ComboBoxItem>
-                            <ComboBoxItem>Robert Lewandowski</ComboBoxItem>
-                        </ComboBox>
+                        <TextBlock Text="Student" Style="{StaticResource LabelStyle}" />
+                        <ComboBox ItemsSource="{Binding AvaiableStudents}"
+                                  SelectedItem="{Binding SelectedLesson.Student}"
+                                  DisplayMemberPath="FullName"
+                                  Style="{StaticResource ComboBoxStyle}" />
                     </StackPanel>
                 </StackPanel>
             </Grid>
 
             <StackPanel Grid.Row="2" Background="#111827">
                 <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Margin="0" Style="{StaticResource CloseButtonStyle}">
+                    <Button Margin="0" Style="{StaticResource CloseButtonStyle}"
+                            Click="CloseModalBtn_Click">
                         <TextBlock Text="cancel" Margin="8 6 8 6"/>
                     </Button>
 
-                    <Button Margin="10 0 0 0" Style="{StaticResource AddButtonStyle}">
+                    <Button Margin="10 0 0 0" Style="{StaticResource AddButtonStyle}"
+                            Command="{Binding UpdateLessonCommand}">
                         <TextBlock Text="update" Margin="8 6 8 6" />
                     </Button>
                 </StackPanel>

@@ -1,5 +1,6 @@
 ﻿using DriveBuddyWpfApp.Core;
 using DriveBuddyWpfApp.MVVM.Models;
+using DriveBuddyWpfApp.MVVM.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,13 +15,15 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         public ObservableCollection<Lesson> LessonsList { get; set; } = new ObservableCollection<Lesson>();
 
+        public ObservableCollection<Category> CategoriesList { get; set; } = new ObservableCollection<Category>();
+
         public ObservableCollection<Instructor> AvaiableInstructors { get; set; } = new ObservableCollection<Instructor>();
 
         public ObservableCollection<Student> AvaiableStudents { get; set; } = new ObservableCollection<Student>();
 
         public ObservableCollection<Car> AvaiableCars { get; set; } = new ObservableCollection<Car>();
 
-        #region ===== New Lesson Properties =====
+        public Lesson SelectedLesson { get; set; } = new Lesson();
 
         private Lesson _newLesson = new Lesson();
 
@@ -34,34 +37,36 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
-        private string _newLessonSelectedCourseCategory = string.Empty;
+        #region ===== Lesson Details =====
 
-        public string NewLessonSelectedCourseCategory
+        private Category _lessonCourseCategory = new Category();
+
+        public Category LessonCourseCategory
         {
-            get => _newLessonSelectedCourseCategory; 
+            get => _lessonCourseCategory; 
             set
             {
-                if (_newLessonSelectedCourseCategory != value)
+                if (_lessonCourseCategory != value)
                 {
-                    _newLessonSelectedCourseCategory = value;
-                    Application.Current.Dispatcher.InvokeAsync(GetAvailableLessonMembers);
-                    OnPropertyChanged(nameof(NewLessonSelectedCourseCategory));
+                    _lessonCourseCategory = value;
+                    OnPropertyChanged(nameof(LessonCourseCategory));
+                    GetAvailableLessonMembers();
                 }
             }
         }
 
-        private DateTime _newLessonDate = DateTime.Now.AddDays(-1);
+        private DateTime _lessonDate = DateTime.Now.AddDays(-1);
 
-        public DateTime NewLessonDate
+        public DateTime LessonDate
         {
-            get => _newLessonDate; 
+            get => _lessonDate; 
             set
             {
-                if (_newLessonDate != value)
+                if (_lessonDate != value)
                 {
-                    _newLessonDate = value;
-                    Application.Current.Dispatcher.InvokeAsync(GetAvailableLessonMembers);
-                    OnPropertyChanged(nameof(NewLessonDate));
+                    _lessonDate = value;
+                    OnPropertyChanged(nameof(LessonDate));
+                    GetAvailableLessonMembers();
                 }
             }
         }
@@ -72,7 +77,11 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         public ICommand DeleteLessonCommand { get; set; }
 
-        public ICommand AddLessonCommand { get; set; }  
+        public ICommand AddLessonCommand { get; set; }
+
+        public ICommand SetSelectedLessonCommand { get; set; }
+
+        public ICommand UpdateLessonCommand { get; set; }
 
         #endregion
 
@@ -82,6 +91,8 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             LoadLessons();
             DeleteLessonCommand = new RelayCommand(DeleteLesson);
             AddLessonCommand = new RelayCommand(AddLesson);
+            SetSelectedLessonCommand = new RelayCommand(SetSelectedLesson);
+            UpdateLessonCommand = new RelayCommand(UpdateLesson);
         }
 
         #region ===== Action Methods =====
@@ -106,12 +117,12 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
         {
             try
             {
-                Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == NewLessonSelectedCourseCategory);
+                Category category = _db.Categories.FirstOrDefault(c => c.CategoryName == LessonCourseCategory.CategoryName);
 
                 if(category != null)
                 {
                     NewLesson.CourseCategoryID = category.CategoryID;
-                    NewLesson.LessonDate = NewLessonDate;
+                    NewLesson.LessonDate = LessonDate;
                     NewLesson.HoursNumber = 3;
                     _db.Lessons.Add(NewLesson);
                     _db.SaveChanges();
@@ -131,22 +142,49 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        private void SetSelectedLesson(object obj)
+        {
+            var lesson = obj as Lesson;
+            SelectedLesson = lesson;
+            LessonDate = lesson.LessonDate;
+            LessonCourseCategory = lesson.Category;
+            var updateLessonModalView = new UpdateLessonModalView();
+            updateLessonModalView.DataContext = this;
+            updateLessonModalView.ShowDialog();
+        }
+
+        private void UpdateLesson(object obj)
+        {
+            try
+            {
+                var lesson = _db.Lessons.Find(SelectedLesson.LessonID);
+                _db.Entry(lesson).CurrentValues.SetValues(SelectedLesson);
+                _db.SaveChanges();
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong. Lesson has not been updated.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void GetAvailableLessonMembers()
         {
             AvaiableInstructors.Clear();
             AvaiableStudents.Clear();
             AvaiableCars.Clear();
 
-            if (!string.IsNullOrEmpty(NewLessonSelectedCourseCategory))
+            string lessonCourseCategoryName = LessonCourseCategory.CategoryName;
+
+            if (!string.IsNullOrEmpty(lessonCourseCategoryName))
             {
-                var availableInstructors = _db.Instructors.Where(i => i.Categories.Any(c => c.CategoryName == NewLessonSelectedCourseCategory) &&
-                                                 i.Lessons.Count(l => l.LessonDate == NewLessonDate) < 3).ToList();
+                var availableInstructors = _db.Instructors.Where(i => i.Categories.Any(c => c.CategoryName == lessonCourseCategoryName) &&
+                                                 i.Lessons.Count(l => l.LessonDate == LessonDate) < 3).ToList();
 
-                var availableCars = _db.Cars.Where(c => c.Category.CategoryName == NewLessonSelectedCourseCategory &&
-                                   c.Lessons.Count(l => l.LessonDate == NewLessonDate) < 3).ToList();
+                var availableCars = _db.Cars.Where(c => c.Category.CategoryName == lessonCourseCategoryName &&
+                                   c.Lessons.Count(l => l.LessonDate == LessonDate) < 3).ToList();
 
-                var availableStudents = _db.Students.Where(s => s.CourseDetails.Any(cd => cd.Category.CategoryName == NewLessonSelectedCourseCategory) &&
-                                          !s.Lessons.Any(l => l.LessonDate == NewLessonDate)).ToList();
+                var availableStudents = _db.Students.Where(s => s.CourseDetails.Any(cd => cd.Category.CategoryName == lessonCourseCategoryName) &&
+                                          !s.Lessons.Any(l => l.LessonDate == LessonDate)).ToList();
 
                 foreach (var instructor in availableInstructors)
                     AvaiableInstructors.Add(instructor);
@@ -161,7 +199,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #endregion
 
-        private void LoadLessons() => LessonsList = new ObservableCollection<Lesson>(_db.Lessons);
-
+        private void LoadLessons() 
+        { 
+            LessonsList = new ObservableCollection<Lesson>(_db.Lessons);
+            CategoriesList = new ObservableCollection<Category>(_db.Categories);
+        } 
     }
 }

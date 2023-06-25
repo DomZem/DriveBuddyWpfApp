@@ -43,7 +43,7 @@
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Date" Style="{StaticResource LabelStyle}" />
                         <DatePicker Style="{StaticResource DatePickerStyle}"
-                                    SelectedDate="{Binding NewLessonDate, StringFormat=dd.MM.yyyy, Mode=TwoWay}" />
+                                    SelectedDate="{Binding LessonDate, StringFormat=dd.MM.yyyy, Mode=TwoWay}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
@@ -58,26 +58,10 @@
                 <StackPanel Grid.Column="2" Margin="10">
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                         <TextBlock Text="Course category" Style="{StaticResource LabelStyle}" />
-                        <ComboBox Style="{StaticResource ComboBoxStyle}"
-                                  SelectedValue="{Binding NewLessonSelectedCourseCategory, Mode=TwoWay}"
-                                  SelectedValuePath="Content">
-                            <ComboBoxItem>AM</ComboBoxItem>
-                            <ComboBoxItem>A1</ComboBoxItem>
-                            <ComboBoxItem>A2</ComboBoxItem>
-                            <ComboBoxItem>A</ComboBoxItem>
-                            <ComboBoxItem>B1</ComboBoxItem>
-                            <ComboBoxItem>B</ComboBoxItem>
-                            <ComboBoxItem>C1</ComboBoxItem>
-                            <ComboBoxItem>C</ComboBoxItem>
-                            <ComboBoxItem>D1</ComboBoxItem>
-                            <ComboBoxItem>D</ComboBoxItem>
-                            <ComboBoxItem>BE</ComboBoxItem>
-                            <ComboBoxItem>C1E</ComboBoxItem>
-                            <ComboBoxItem>CE</ComboBoxItem>
-                            <ComboBoxItem>D1E</ComboBoxItem>
-                            <ComboBoxItem>DE</ComboBoxItem>
-                            <ComboBoxItem>T</ComboBoxItem>
-                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding CategoriesList}"
+                                  SelectedItem="{Binding LessonCourseCategory}"
+                                  DisplayMemberPath="CategoryName"                            
+                                  Style="{StaticResource ComboBoxStyle}" />
                     </StackPanel>
                     
                     <StackPanel Orientation="Vertical" Margin="0 0 0 5">
