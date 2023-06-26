@@ -9,24 +9,48 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
+    /// <summary>
+    /// Represents the view model for managing lessons.
+    /// </summary>
     public class LessonsViewModel : ObservableObject
     {
         DriveBuddyEntities _db;
 
+        /// <summary>
+        /// Get the list of lessons from database.
+        /// </summary>
         public ObservableCollection<Lesson> LessonsList { get; set; } = new ObservableCollection<Lesson>();
 
+        /// <summary>
+        /// Get the list of categories from database.
+        /// </summary>
         public ObservableCollection<Category> CategoriesList { get; set; } = new ObservableCollection<Category>();
 
+        /// <summary>
+        /// Get a list of a avaiable instructors from database.
+        /// </summary>
         public ObservableCollection<Instructor> AvaiableInstructors { get; set; } = new ObservableCollection<Instructor>();
 
+        /// <summary>
+        /// Get a list of a avaiable students from database.
+        /// </summary>
         public ObservableCollection<Student> AvaiableStudents { get; set; } = new ObservableCollection<Student>();
 
+        /// <summary>
+        /// Get a list of a avaiable cars from database.
+        /// </summary>
         public ObservableCollection<Car> AvaiableCars { get; set; } = new ObservableCollection<Car>();
 
+        /// <summary>
+        /// Get the selected lesson to update.
+        /// </summary>
         public Lesson SelectedLesson { get; set; } = new Lesson();
 
         private Lesson _newLesson = new Lesson();
 
+        /// <summary>
+        /// Get the new lesson.
+        /// </summary>
         public Lesson NewLesson
         {
             get => _newLesson;
@@ -41,6 +65,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         private Category _lessonCourseCategory = new Category();
 
+        /// <summary>
+        /// Get selected lesson course category and call GetAvailableLessonMembers on set.
+        /// </summary>
         public Category LessonCourseCategory
         {
             get => _lessonCourseCategory; 
@@ -57,6 +84,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         private DateTime _lessonDate = DateTime.Now.AddDays(-1);
 
+        /// <summary>
+        /// Get selected lesson date and call GetAvailableLessonMembers on set.
+        /// </summary>
         public DateTime LessonDate
         {
             get => _lessonDate; 
@@ -75,16 +105,31 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #region ===== Commands =====
 
+        /// <summary>
+        /// Command for deleting a lesson in database.
+        /// </summary>
         public ICommand DeleteLessonCommand { get; set; }
 
+        /// <summary>
+        /// Command for adding a new lesson in database.
+        /// </summary>
         public ICommand AddLessonCommand { get; set; }
 
+        /// <summary>
+        /// Command for setting the selected lesson to update.
+        /// </summary>
         public ICommand SetSelectedLessonCommand { get; set; }
 
+        /// <summary>
+        /// Command for updating a lesson in datbase.
+        /// </summary>
         public ICommand UpdateLessonCommand { get; set; }
 
         #endregion
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="LessonsViewModel"/> class.
+        /// </summary>
         public LessonsViewModel()
         {
             _db = new DriveBuddyEntities();
@@ -97,6 +142,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #region ===== Action Methods =====
 
+        /// <summary>
+        /// Delete a lesson and display a message about the performed operation.
+        /// </summary>
+        /// <param name="obj">The lesson object to delete.</param>
         private void DeleteLesson(object obj)
         {
             try
@@ -113,6 +162,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Add a new lesson and display a message about the performed operation.
+        /// </summary>
+        /// <param name="obj">The object representing the new lesson.</param>
         private void AddLesson(object obj)
         {
             try
@@ -142,6 +195,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Set the selected lesson to update and open the update lesson modal view.
+        /// </summary>
+        /// <param name="obj">The selected lesson object.</param>
         private void SetSelectedLesson(object obj)
         {
             var lesson = obj as Lesson;
@@ -153,6 +210,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             updateLessonModalView.ShowDialog();
         }
 
+        /// <summary>
+        /// Update the selected lesson and display a message about the performed operation
+        /// </summary>
+        /// <param name="obj">The selected lesson object.</param>
         private void UpdateLesson(object obj)
         {
             try
@@ -168,6 +229,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Retrieve the available lesson members (instructors, students, and cars) based on the lesson details like lesson course category and date.
+        /// </summary>
         private void GetAvailableLessonMembers()
         {
             AvaiableInstructors.Clear();
@@ -215,6 +279,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Load the initial data for lessons and categories.
+        /// </summary>
         private void LoadLessons() 
         { 
             LessonsList = new ObservableCollection<Lesson>(_db.Lessons);
