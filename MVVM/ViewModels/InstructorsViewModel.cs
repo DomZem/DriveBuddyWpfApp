@@ -13,10 +13,16 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
     {
         DriveBuddyEntities _db;
 
+        /// <summary>
+        /// Get the list of instructors from database.
+        /// </summary>
         public ObservableCollection<Instructor> InstructorsList { get; set; } = new ObservableCollection<Instructor>();
 
         private Instructor _newInstructor = new Instructor();
 
+        /// <summary>
+        /// Get the new instructor
+        /// </summary>
         public Instructor NewInstructor
         {
             get => _newInstructor;  
@@ -27,22 +33,43 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Get the selected instructor to update.
+        /// </summary>
         public Instructor SelectedInstructor { get; set; } = new Instructor();
 
+        /// <summary>
+        /// Get or set the instructor licenses.
+        /// </summary>
         public string InstructorLicenses { get; set; } = string.Empty;
-       
+
         #region ===== Commands =====
 
+        /// <summary>
+        /// Command for deleting a instructor in database.
+        /// </summary>
         public ICommand DeleteInstructorCommand { get; set; }
 
+        /// <summary>
+        /// Command for adding a new instructor in database.
+        /// </summary>
         public ICommand AddInstructorCommand { get; set; }
 
+        /// <summary>
+        /// Command for setting the selected instructor to update.
+        /// </summary>
         public ICommand SetSelectedInstructorCommand { get; set; }
 
+        /// <summary>
+        /// Command for updating a instructor in datbase.
+        /// </summary>
         public ICommand UpdateInstructorCommand { get; set; }
 
         #endregion
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="InstructorsViewModel"/> class.
+        /// </summary>
         public InstructorsViewModel()
         {
             _db = new DriveBuddyEntities();
@@ -56,6 +83,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #region ===== Action Methods =====
 
+        /// <summary>
+        /// Delete a instructor and display a message about the performed operation.
+        /// </summary>
+        /// <param name="obj">The instructor object to delete.</param>
         private void DeleteInstructor(object obj)
         {
             try
@@ -72,6 +103,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Add a new instructor and display a message about the performed operation.
+        /// </summary>
+        /// <param name="obj">The object representing the new instructor.</param>
         private void AddInstructor(object obj)
         {
             try
@@ -107,6 +142,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Set the selected instructor to update and open the update instructor modal view.
+        /// </summary>
+        /// <param name="obj">The selected instructor object.</param>
         private void SetSelectedInstructor(object obj)
         {
             var instructor = obj as Instructor;
@@ -117,6 +156,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             updateInstructorModalView.ShowDialog();
         }
 
+        /// <summary>
+        /// Update the selected instructor and display a message about the performed operation
+        /// </summary>
+        /// <param name="obj">The selected instructor object.</param>
         private void UpdateInstructor(object obj)
         {
             try
@@ -149,6 +192,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Load the initial data for instructors.
+        /// </summary>
         private void LoadInstructors() => InstructorsList = new ObservableCollection<Instructor>(_db.Instructors);
     }
 }
