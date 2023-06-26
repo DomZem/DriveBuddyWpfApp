@@ -160,6 +160,7 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
                 var lesson = _db.Lessons.Find(SelectedLesson.LessonID);
                 _db.Entry(lesson).CurrentValues.SetValues(SelectedLesson);
                 _db.SaveChanges();
+                MessageBox.Show("Lesson has been updated", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch
             {
@@ -177,15 +178,30 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
             if (!string.IsNullOrEmpty(lessonCourseCategoryName))
             {
-                var availableInstructors = _db.Instructors.Where(i => i.Categories.Any(c => c.CategoryName == lessonCourseCategoryName) &&
-                                                 i.Lessons.Count(l => l.LessonDate == LessonDate) < 3).ToList();
+                var availableInstructors = _db.Instructors
+                    .Where(i => i.Categories.Any(c => c.CategoryName == lessonCourseCategoryName) &&
+                                i.Lessons.Count(l => l.LessonDate == LessonDate) < 3)
+                    .ToList();
+   
+                if (SelectedLesson.Instructor != null && !availableInstructors.Contains(SelectedLesson.Instructor))
+                    availableInstructors.Add(SelectedLesson.Instructor);
+                
+                var availableCars = _db.Cars
+                    .Where(c => c.Category.CategoryName == lessonCourseCategoryName &&
+                                c.Lessons.Count(l => l.LessonDate == LessonDate) < 3)
+                    .ToList();
 
-                var availableCars = _db.Cars.Where(c => c.Category.CategoryName == lessonCourseCategoryName &&
-                                   c.Lessons.Count(l => l.LessonDate == LessonDate) < 3).ToList();
+                if (SelectedLesson.Car != null && !availableCars.Contains(SelectedLesson.Car))
+                    availableCars.Add(SelectedLesson.Car);
+                
+                var availableStudents = _db.Students
+                    .Where(s => s.CourseDetails.Any(cd => cd.Category.CategoryName == lessonCourseCategoryName) &&
+                                !s.Lessons.Any(l => l.LessonDate == LessonDate))
+                    .ToList();
 
-                var availableStudents = _db.Students.Where(s => s.CourseDetails.Any(cd => cd.Category.CategoryName == lessonCourseCategoryName) &&
-                                          !s.Lessons.Any(l => l.LessonDate == LessonDate)).ToList();
-
+                if (SelectedLesson.Student != null && !availableStudents.Contains(SelectedLesson.Student))
+                    availableStudents.Add(SelectedLesson.Student);
+                
                 foreach (var instructor in availableInstructors)
                     AvaiableInstructors.Add(instructor);
 

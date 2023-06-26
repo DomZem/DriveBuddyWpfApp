@@ -58,7 +58,6 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             NewStudent.BirthDate = DateTime.Now.AddDays(1);
         }
 
-
         #region ===== Action Methods =====
 
         private void DeleteStudent(object obj)
