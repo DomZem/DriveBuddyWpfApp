@@ -9,20 +9,38 @@ using System.Windows.Input;
 
 namespace DriveBuddyWpfApp.MVVM.ViewModels
 {
+    /// <summary>
+    /// Represents the view model for managing students.
+    /// </summary>
     public class StudentsViewModel : ObservableObject
     {
         DriveBuddyEntities _db;
 
+        /// <summary>
+        /// Get the list of students from database.
+        /// </summary>
         public ObservableCollection<Student> StudentsList { get; set; } = new ObservableCollection<Student>();
 
+        /// <summary>
+        /// Get the list of categories from database.
+        /// </summary>
         public ObservableCollection<Category> CategoriesList { get; set; } = new ObservableCollection<Category>();
 
+        /// <summary>
+        /// Get the selected student to update.
+        /// </summary>
         public Student SelectedStudent { get; set; } = new Student();
 
+        /// <summary>
+        /// Get or set new student course category.
+        /// </summary>
         public Category NewStudentCourseCategory { get; set; } = new Category();
         
-        public Student _newStudent = new Student();
-        
+        private Student _newStudent = new Student();
+
+        /// <summary>
+        /// Get the new student.
+        /// </summary>
         public Student NewStudent
         {
             get => _newStudent;
@@ -35,16 +53,31 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #region ===== Commands =====
 
-        public ICommand DeleteStudentCommand { get; set; }  
+        /// <summary>
+        /// Command for deleting a student in database.
+        /// </summary>
+        public ICommand DeleteStudentCommand { get; set; }
 
+        /// <summary>
+        /// Command for adding a new student in database.
+        /// </summary>
         public ICommand AddStudentCommand { get; set; }
 
+        /// <summary>
+        /// Command for setting the selected student to update.
+        /// </summary>
         public ICommand SetSelectedStudentCommand { get; set; }
 
+        /// <summary>
+        /// Command for updating a student in datbase.
+        /// </summary>
         public ICommand UpdateStudentCommand { get; set; }
 
         #endregion
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="StudentsViewModel"/> class.
+        /// </summary>
         public StudentsViewModel()
         {
             _db = new DriveBuddyEntities();
@@ -60,6 +93,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #region ===== Action Methods =====
 
+        /// <summary>
+        /// Delete a student and display a message about the performed operation.
+        /// </summary>
+        /// <param name="obj">The student object to delete.</param>
         private void DeleteStudent(object obj)
         {
             try
@@ -76,6 +113,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Add a new student and display a message about the performed operation.
+        /// </summary>
+        /// <param name="obj">The object representing the student car.</param>
         private void AddStudent(object obj)
         {
             try
@@ -102,6 +143,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Set the selected student to update and open the update student modal view.
+        /// </summary>
+        /// <param name="obj">The selected student object.</param>
         private void SetSelectedStudent(object obj) 
         {
             var student = obj as Student;
@@ -111,6 +156,10 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
             updateStudentModalView.ShowDialog();  
         }
 
+        /// <summary>
+        /// Update the selected student and display a message about the performed operation
+        /// </summary>
+        /// <param name="obj">The selected student object.</param>
         private void UpdateStudent(object obj) 
         {
             try
@@ -128,6 +177,9 @@ namespace DriveBuddyWpfApp.MVVM.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// Load the initial data for students and categories.
+        /// </summary>
         private void LoadData() 
         { 
             StudentsList = new ObservableCollection<Student>(_db.Students);
